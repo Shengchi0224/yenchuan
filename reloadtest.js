@@ -1,12 +1,13 @@
 // custom.js
 function resetWebflow() {
-  let parser = new DOMParser();
-  let dom = parser.parseFromString(barba.hooks.cache.current.html, "text/html");
-  let webflowPageId = $(dom).find("html").attr("data-wf-page");
-  $("html").attr("data-wf-page", webflowPageId);
+  let webflowPageId = $('html').attr('data-wf-page');
+  const parser = new DOMParser();
+  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
+  webflowPageId = $(dom).find('body').text();
+  $('html').attr('data-wf-page', webflowPageId);
   window.Webflow && window.Webflow.destroy();
   window.Webflow && window.Webflow.ready();
-  window.Webflow && window.Webflow.require("ix2").init();
+  window.Webflow && window.Webflow.require('ix2').init();
 }
 
 function reloadGSAP() {
