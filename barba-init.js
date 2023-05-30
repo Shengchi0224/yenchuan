@@ -22,16 +22,17 @@ function enterAnimation() {
 }
 
 barba.init({
-  transitions: [
-    {
-      name: "page-transition",
-      preventRunning:true,
-      leave(data) {
-        leaveAnimation();
-      },
-      enter(data) {
-        enterAnimation();
-      },
+  transitions: [{
+    name: 'opacity-transition',
+    leave(data) {
+      return gsap.to(data.current.container, {
+        opacity: 0
+      });
     },
-  ],
+    enter(data) {
+      return gsap.from(data.next.container, {
+        opacity: 0
+      });
+    }
+  }]
 });
