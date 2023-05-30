@@ -85,8 +85,6 @@ function animate() {
 
 // Start the animation.
 animate();
-
-
-    document.addEventListener("DOMContentLoaded", function(event) {
-      reloadgui();
+document.addEventListener("DOMContentLoaded", function(event) {
+reloadAnimation();
     }); 
