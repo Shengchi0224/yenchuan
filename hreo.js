@@ -52,7 +52,7 @@ class Circle {
 
 
 
-function initial() {
+function reloadgui() {
     can = document.getElementById("can");
     ctx = can.getContext("2d");
     g = new dat.GUI();
@@ -260,4 +260,4 @@ setTimeout(function() {
     drag = 50;
 }, 2000);
 }
-initial();
+reloadgui();
