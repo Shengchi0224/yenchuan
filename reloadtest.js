@@ -109,6 +109,7 @@ function reloadJS() {
 function initial() {
   animateElements();
   reloadGSAP();
+  resetWebflow();
   reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
@@ -160,7 +161,6 @@ function initial() {
     arrowScroll: 50,
     fixedBackground: 0,
   });
-  resetWebflow();
   reloadgui();
 }
 
