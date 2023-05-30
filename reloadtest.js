@@ -1,5 +1,6 @@
 // custom.js
 function resetWebflow() {
+  // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
   const parser = new DOMParser();
   const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
@@ -11,32 +12,31 @@ function resetWebflow() {
 }
 
 function reloadGSAP() {
-  var gsapScript = document.querySelector(
-    'script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"]'
-  );
-  var newScript = document.createElement("script");
-  newScript.src =
-    "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js";
+  // Reload GSAP library
+  const gsapScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"]');
+  const newScript = document.createElement('script');
+  newScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js';
 
-  newScript.onload = function () {
-    console.log("GSAP library reloaded!");
+  newScript.onload = function() {
+    console.log('GSAP library reloaded!');
     // You can perform any additional logic here after the library is reloaded
   };
 
   if (gsapScript) {
     gsapScript.parentNode.replaceChild(newScript, gsapScript);
   } else {
-    // If the existing script tag is not found, append the new script to the document body
-    document.body.appendChild(newScript);
+    // If the existing script tag is not found, append the new script to the document head
+    document.head.appendChild(newScript);
   }
 }
 
 function animateElements() {
+  // Animate elements using GSAP
   const textrev = gsap.timeline();
 
-  textrev.from(".hero_text", 1.8, {
+  textrev.from('.hero_text', 1.8, {
     y: 200,
-    ease: "power4.out",
+    ease: 'power4.out',
     delay: 1,
     skewY: 10,
     stagger: {
@@ -45,15 +45,15 @@ function animateElements() {
   });
 
   gsap.fromTo(
-    ".text",
+    '.text',
     {
-      y: "100%",
+      y: '100%',
       skewY: 10,
     },
     {
       duration: 2,
-      ease: "power4.out",
-      y: "0%",
+      ease: 'power4.out',
+      y: '0%',
       stagger: 0.2,
       skewY: 0,
     }
@@ -61,10 +61,11 @@ function animateElements() {
 }
 
 function reloadJS() {
-  // Reload necessary JavaScript files
+  // Reload all necessary JavaScript files
   resetWebflow();
   reloadGSAP();
   animateElements();
+  // Add any additional JavaScript files or functions to reload here
   reloadgui();
   reloadAnimation();
   new Splide('.splide', {
@@ -103,20 +104,6 @@ function reloadJS() {
       },
     },
   }).mount();
-
-  new SmoothScroll({
-    frameRate: 150,
-    animationTime: 1000,
-    stepSize: 100,
-    pulseAlgorithm: 1,
-    pulseScale: 4,
-    pulseNormalize: 1,
-    accelerationDelta: 50,
-    accelerationMax: 3,
-    keyboardSupport: 1,
-    arrowScroll: 50,
-    fixedBackground: 0,
-  });
 }
 // Call the necessary functions when the page is loaded
 function initial() {
