@@ -17,8 +17,10 @@ function reloadAnimation() {
   let morph = 0;
   let cooldown = cooldownTime;
 
-  elts.text1.textContent = texts[textIndex % texts.length];
-  elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+  if (elts.text1 && elts.text2) {
+	elts.text1.textContent = texts[textIndex % texts.length];
+	elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+}
 
   function doMorph() {
     morph -= cooldown;
@@ -35,6 +37,7 @@ function reloadAnimation() {
   }
 
   function setMorph(fraction) {
+  if (elts.text2 && elts.text1) {
     elts.text2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
     elts.text2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
 
@@ -45,16 +48,19 @@ function reloadAnimation() {
     elts.text1.textContent = texts[textIndex % texts.length];
     elts.text2.textContent = texts[(textIndex + 1) % texts.length];
   }
+}
 
   function doCooldown() {
-    morph = 0;
+  morph = 0;
 
+  if (elts.text2 && elts.text1) {
     elts.text2.style.filter = "";
     elts.text2.style.opacity = "100%";
 
     elts.text1.style.filter = "";
     elts.text1.style.opacity = "0%";
   }
+}
 
   function animate() {
     requestAnimationFrame(animate);
