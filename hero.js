@@ -1,8 +1,9 @@
+var arr = [];
+
 function reloadgui() {
 var can = document.getElementById("can");
 var ctx = can.getContext("2d");
 
-var arr = [];
 var grid = [];
 let drag = 1000;
 var settings = {
@@ -50,7 +51,7 @@ class Circle {
 }
 
 function setup() {
-    // arr = [];
+    arr = [];
     grid = [];
     for (var i = arr.length; i < settings.circles; ++i) {
         var circ = new Circle();
