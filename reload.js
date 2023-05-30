@@ -65,3 +65,65 @@ function reloadjs() {
   reloadGSAP();
 }
 window.addEventListener("DOMContentLoaded", reloadjs);
+animateElements();
+initial();
+
+barba.hooks.after((data) => {
+  $(data.next.container).removeClass("fixed");
+  $(".active-flip-item").removeClass("active-flip-item");
+  $(window).scrollTop(0);
+  $(window).addEventListener("DOMContentLoaded", reloadjs);
+  new Splide('.splide', {
+    perPage: 4,
+    perMove: 1,
+    focus: 0,
+    type: 'loop',
+    gap: '2.66%',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 600,
+    dragAngleThreshold: 30,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: {
+        // Tablet
+        perPage: 2,
+        gap: '3vw',
+      },
+      767: {
+        // Mobile Landscape
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+      479: {
+        // Mobile Portrait
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+    },
+  }).mount();
+
+  new SmoothScroll({
+    frameRate: 150,
+    animationTime: 1000,
+    stepSize: 100,
+    pulseAlgorithm: 1,
+    pulseScale: 4,
+    pulseNormalize: 1,
+    accelerationDelta: 50,
+    accelerationMax: 3,
+    keyboardSupport: 1,
+    arrowScroll: 50,
+    fixedBackground: 0,
+  });
+
+  reloadAnimation(data);
+  initial(data);
+});
