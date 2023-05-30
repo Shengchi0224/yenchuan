@@ -85,7 +85,6 @@ function animate() {
 // Start the animation.
 animate();
 }
-
 document.addEventListener("DOMContentLoaded", function(event) {
-	reloadAnimation();
+reloadAnimation();
 });
