@@ -14,6 +14,30 @@ function reloadgui() {
       x: 3 * Math.random() * this.directions[~~(Math.random() * 2)],
       y: 3 * Math.random() * this.directions[~~(Math.random() * 2)]
     };
+    this.update = function(index) {
+  // Calculate the distance between the circle and its target
+  var dx = this.target.x - this.x;
+  var dy = this.target.y - this.y;
+  var distance = Math.sqrt(dx * dx + dy * dy);
+  
+  // If the circle is close to its target, generate a new target
+  if (distance < 5) {
+    this.target.x = can.width / 2;
+    this.target.y = can.height / 2;
+  }
+  
+  // Update the circle's position based on its velocity
+  this.x += this.vel.x;
+  this.y += this.vel.y;
+  
+  // If the circle reaches the edge of the canvas, reverse its velocity
+  if (this.x < 0 || this.x > can.width) {
+    this.vel.x *= -1;
+  }
+  if (this.y < 0 || this.y > can.height) {
+    this.vel.y *= -1;
+  }
+};
   }
 
   function setup() {
