@@ -1,7 +1,7 @@
 // custom.js
-function resetWebflow(data) {
+function resetWebflow() {
   let parser = new DOMParser();
-  let dom = parser.parseFromString(data.current.html, "text/html");
+  let dom = parser.parseFromString(barba.hooks.cache.current.html, "text/html");
   let webflowPageId = $(dom).find("html").attr("data-wf-page");
   $("html").attr("data-wf-page", webflowPageId);
   window.Webflow && window.Webflow.destroy();
