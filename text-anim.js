@@ -19,8 +19,10 @@ let time = new Date();
 let morph = 0;
 let cooldown = cooldownTime;
 
-elts.text1.textContent = texts[textIndex % texts.length];
-elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+if (elts.text1 && elts.text2) {
+	elts.text1.textContent = texts[textIndex % texts.length];
+	elts.text2.textContent = texts[(textIndex + 1) % texts.length];
+}
 
 function doMorph() {
 	morph -= cooldown;
