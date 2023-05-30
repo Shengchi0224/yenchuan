@@ -60,7 +60,7 @@ function animateElements() {
 }
 
 // Call the necessary functions when the page is loaded
-function reloadjs() {
+function initial() {
   animateElements();
   resetWebflow();
   reloadGSAP();
@@ -116,17 +116,14 @@ function reloadjs() {
     fixedBackground: 0,
   });
 }
-animateElements();
-initial();
+
 // Call the initial function when the page is loaded
-window.addEventListener("DOMContentLoaded", reloadjs);
+window.addEventListener("DOMContentLoaded", initial);
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
-  $(window).scrollTop(0);
   resetWebflow(data);
   reloadGSAP();
   animateElements();
-  initial();
-  reloadjs();// Initialize Splide and SmoothScroll again after the transition
+  initial(); // Initialize Splide and SmoothScroll again after the transition
 });
