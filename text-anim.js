@@ -82,7 +82,7 @@ function animate() {
 		doCooldown();
 	}
 }
-
+}
 // Start the animation.
 animate();
 document.addEventListener("DOMContentLoaded", function(event) {
