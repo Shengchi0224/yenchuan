@@ -54,13 +54,15 @@ function setMorph(fraction) {
 }
 
 function doCooldown() {
-	morph = 0;
-	
-	elts.text2.style.filter = "";
-	elts.text2.style.opacity = "100%";
-	
-	elts.text1.style.filter = "";
-	elts.text1.style.opacity = "0%";
+  morph = 0;
+
+  if (elts.text2 && elts.text1) {
+    elts.text2.style.filter = "";
+    elts.text2.style.opacity = "100%";
+
+    elts.text1.style.filter = "";
+    elts.text1.style.opacity = "0%";
+  }
 }
 
 // Animation loop, which is called every frame.
