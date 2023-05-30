@@ -64,7 +64,7 @@ function initial() {
   animateElements();
   resetWebflow();
   reloadGSAP();
-
+  reloadgui();
   new Splide('.splide', {
     perPage: 4,
     perMove: 1,
@@ -125,5 +125,6 @@ barba.hooks.after((data) => {
   resetWebflow(data);
   reloadGSAP();
   animateElements();
+  reloadgui();
   initial(); // Initialize Splide and SmoothScroll again after the transition
 });
