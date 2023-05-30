@@ -66,7 +66,6 @@ function reloadJS() {
   reloadGSAP();
   animateElements();
   // Add any additional JavaScript files or functions to reload here
-  reloadgui();
   reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
@@ -104,12 +103,12 @@ function reloadJS() {
       },
     },
   }).mount();
+  reloadgui();
 }
 // Call the necessary functions when the page is loaded
 function initial() {
   animateElements();
   reloadGSAP();
-  reloadgui();
   reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
@@ -162,6 +161,7 @@ function initial() {
     fixedBackground: 0,
   });
   resetWebflow();
+  reloadgui();
 }
 
 // Call the initial function when the page is loaded
