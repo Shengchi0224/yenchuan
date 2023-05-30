@@ -25,6 +25,7 @@ barba.init({
   transitions: [
     {
       name: "page-transition",
+      preventRunning:true,
       leave(data) {
         leaveAnimation();
       },
