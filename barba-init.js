@@ -5,6 +5,7 @@ function leaveAnimation() {
     duration: 1,
     height: "100vh",
     ease: "Power2.out",
+    marginTop:"0vh",
   });
 }
 
@@ -12,7 +13,7 @@ function enterAnimation() {
   const tl = gsap.timeline();
   tl.from(".loading-screen", {
     duration: 1,
-    height: "30vh",
+    marginTop:"70vh",
     ease: "Power2.out",
     onComplete: function() {
       opacity: 0;
