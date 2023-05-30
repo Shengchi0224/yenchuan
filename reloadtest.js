@@ -116,7 +116,8 @@ function reloadjs() {
     fixedBackground: 0,
   });
 }
-
+animateElements();
+initial();
 // Call the initial function when the page is loaded
 window.addEventListener("DOMContentLoaded", reloadjs);
 
