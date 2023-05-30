@@ -62,9 +62,9 @@ function animateElements() {
 // Call the necessary functions when the page is loaded
 function initial() {
   animateElements();
-  resetWebflow();
   reloadGSAP();
   reloadgui();
+  reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
     perMove: 1,
@@ -115,6 +115,7 @@ function initial() {
     arrowScroll: 50,
     fixedBackground: 0,
   });
+  resetWebflow();
 }
 
 // Call the initial function when the page is loaded
@@ -122,9 +123,10 @@ window.addEventListener("DOMContentLoaded", initial);
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
-  resetWebflow(data);
   reloadGSAP();
   animateElements();
   reloadgui();
-  initial(); // Initialize Splide and SmoothScroll again after the transition
+  reloadAnimation();
+  initial(); 
+  resetWebflow(data);// Initialize Splide and SmoothScroll again after the transition
 });
