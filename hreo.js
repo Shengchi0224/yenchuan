@@ -115,4 +115,6 @@ function reloadgui() {
   init();
 }
 
-window.addEventListener("DOMContentLoaded", reloadgui);
+window.onload = function() {
+  reloadgui();
+};
