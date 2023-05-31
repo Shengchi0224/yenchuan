@@ -25,11 +25,10 @@ function enterAnimation() {
   }, 
   {
     duration: 1,
+    height:"30vh",
     marginTop:"70vh",
     ease: "Power2.out",
-    onComplete: function() {
-      opacity: 0;
-    },
+    opacity: 0,
   });
 }
 
