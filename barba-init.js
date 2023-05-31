@@ -26,12 +26,9 @@ barba.init({
     name: 'opacity-transition',
     leave(data) {
       leaveAnimation();
-      });
     },
     enter(data) {
-      return gsap.from(data.next.container, {
-       enterAnimation();
-      });
+      enterAnimation();
     }
   }]
 });
