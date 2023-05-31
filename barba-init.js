@@ -56,6 +56,8 @@ barba.init({
       async after(data) {
         enterAnimation();
       },
+      // Disable cache for this transition
+      cacheDisabled: true,
     },
   ],
 });
