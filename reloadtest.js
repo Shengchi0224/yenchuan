@@ -66,7 +66,6 @@ function reloadJS() {
   reloadGSAP();
   animateElements();
   // Add any additional JavaScript files or functions to reload here
-  reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
     perMove: 1,
@@ -110,7 +109,6 @@ function initial() {
   animateElements();
   reloadGSAP();
   resetWebflow();
-  reloadAnimation();
   new Splide('.splide', {
     perPage: 4,
     perMove: 1,
