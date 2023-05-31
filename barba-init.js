@@ -11,6 +11,7 @@ function leaveAnimation() {
   console.log("leave");
   const tl = gsap.timeline();
   tl.fromTo(".loading-screen", {
+    opacity: 1,
     height: "0vh",
   },
   {
