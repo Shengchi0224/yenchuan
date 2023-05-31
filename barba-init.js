@@ -52,7 +52,7 @@ barba.init({
         await delay(1000);
         done();
       },
-      async enter(data) {
+      async afterEnter(data) {
         const done = this.async();
         enterAnimation();
         await delay(1000);
