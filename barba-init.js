@@ -10,7 +10,11 @@ function delay(time) {
 function leaveAnimation() {
   console.log("leave");
   const tl = gsap.timeline();
-  tl.to(".loading-screen", {
+  tl.fromTo(".loading-screen", {
+    height: "0vh",
+    marginTop: "100vh",
+  },
+  {
     duration: 1,
     height: "100vh",
     ease: "Power2.out",
