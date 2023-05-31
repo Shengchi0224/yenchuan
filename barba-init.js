@@ -47,7 +47,7 @@ barba.init({
     {
       preventRunning: true,
       name: 'opacity-transition',
-      async leave(data) {
+      async beforeEnter(data) {
         leaveAnimation();
       },
       async after(data) {
