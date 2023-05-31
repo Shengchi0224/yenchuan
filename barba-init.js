@@ -1,3 +1,11 @@
+function delay(time) {
+  time = time || 2000;
+  return new Promise((done) => {
+    setTimeout(() => {
+      done();
+    }, time);
+  });
+}
 function leaveAnimation() {
   console.log("leave");
   const tl = gsap.timeline();
