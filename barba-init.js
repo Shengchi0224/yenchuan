@@ -24,11 +24,15 @@ function enterAnimation() {
     marginTop:"0vh",
   }, 
   {
+    borderRadius: '40px',
     duration: 1,
     height:"30vh",
     marginTop:"70vh",
     ease: "Power2.out",
+    backgroundColor:"white",
+    onComplete:()=>{
     opacity: 0,
+  }
   });
 }
 
