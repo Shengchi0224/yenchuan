@@ -49,7 +49,6 @@ barba.init({
       name: 'opacity-transition',
       async leave(data) {
         leaveAnimation();
-        await delay(1000);
       },
       async after(data) {
         enterAnimation();
