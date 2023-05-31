@@ -57,7 +57,7 @@ barba.init({
         enterAnimation();
       },
       async once(data) {
-          contentAnimation();
+        enterAnimation();
       }
     },
   ],
