@@ -19,7 +19,11 @@ function leaveAnimation() {
 
 function enterAnimation() {
   const tl = gsap.timeline();
-  tl.to(".loading-screen", {
+  tl.fromTo(".loading-screen",{
+    height: "100vh",
+    marginTop:"0vh",
+  }, 
+  {
     duration: 1,
     marginTop:"70vh",
     ease: "Power2.out",
