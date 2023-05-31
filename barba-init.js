@@ -30,9 +30,9 @@ function enterAnimation() {
     marginTop:"70vh",
     ease: "Power2.out",
     backgroundColor:"white",
-    onComplete:()=>{
-    opacity: 0,
-  }
+    onComplete: () => {
+    opacity:0,
+            },
   });
 }
 
