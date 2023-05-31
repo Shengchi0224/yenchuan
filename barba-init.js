@@ -12,7 +12,9 @@ function leaveAnimation() {
   const tl = gsap.timeline();
   tl.fromTo(".loading-screen", {
     opacity: 1,
+    borderRadius: '0px',
     height: "0vh",
+    backgroundColor: "#522c18",
   },
   {
     duration: 1,
