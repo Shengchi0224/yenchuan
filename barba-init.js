@@ -24,11 +24,17 @@ function enterAnimation() {
 barba.init({
   transitions: [{
     name: 'opacity-transition',
-    leave(data) {
-      leaveAnimation();
+    async leave(data) {
+          const done = this.async();
+          leaveAnimation();
+          await delay(1000);
+          done();
     },
-    enter(data) {
-      enterAnimation();
-    }
+    async enter(data) {
+          const done = this.async();
+          enterAnimation();
+          await delay(1000);
+          done();
+    },
   }]
 });
