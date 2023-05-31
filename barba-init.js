@@ -12,7 +12,6 @@ function leaveAnimation() {
   const tl = gsap.timeline();
   tl.fromTo(".loading-screen", {
     height: "0vh",
-    marginTop: "100vh",
   },
   {
     duration: 1,
@@ -58,9 +57,6 @@ barba.init({
         done();
       },
       async after(data) {
-        enterAnimation();
-      },
-      async once(data) {
         enterAnimation();
       }
     },
