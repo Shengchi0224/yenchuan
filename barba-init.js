@@ -1,5 +1,3 @@
-import barbaPrefetch from '@barba/prefetch';
-
 function delay(time) {
   time = time || 2000;
   return new Promise((done) => {
