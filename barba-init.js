@@ -1,3 +1,5 @@
+import barbaPrefetch from '@barba/prefetch';
+
 function delay(time) {
   time = time || 2000;
   return new Promise((done) => {
@@ -51,6 +53,8 @@ function enterAnimation() {
   );
 }
 
+barba.use(barbaPrefetch);
+
 barba.init({
   transitions: [
     {
@@ -65,7 +69,6 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
-        console.log("barbaPrefetch is running:", data.next.container.dataset.barbaPrefetch);
       },
     },
   ],
