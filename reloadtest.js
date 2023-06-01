@@ -102,7 +102,6 @@ function reloadJS() {
       },
     },
   }).mount();
-  reloadgui();
 }
 // Call the necessary functions when the page is loaded
 function initial() {
@@ -159,6 +158,10 @@ barba.hooks.after((data) => {
   if (data.current) {
     // Page transition occurred
     reloadJS();
+    // Wait for the transition animation to complete before calling reloadgui()
+    setTimeout(() => {
+      reloadgui();
+    }, 1000); // Adjust the delay as needed
   } else {
     // Initial page load
     initial();
