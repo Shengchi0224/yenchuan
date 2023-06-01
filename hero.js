@@ -245,7 +245,3 @@ setTimeout(function(){
 	drag = 50;
 },2000)
 }
-
-window.onload = function() {
-  reloadgui();
-};
