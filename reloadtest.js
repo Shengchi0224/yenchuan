@@ -1,5 +1,4 @@
 // custom.js
-let gui;
 function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
@@ -61,6 +60,8 @@ function animateElements() {
   );
 }
 
+let gui = null;
+
 function reloadJS() {
   // Reload all necessary JavaScript files
   resetWebflow();
@@ -103,7 +104,7 @@ function reloadJS() {
       },
     },
   }).mount();
-  
+
   if (gui) {
     console.log('Destroying dat.gui instance');
     gui.destroy();
