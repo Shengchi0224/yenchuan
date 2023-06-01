@@ -103,8 +103,9 @@ function reloadJS() {
       },
     },
   }).mount();
-
+  
   if (gui) {
+    console.log('Destroying dat.gui instance');
     gui.destroy();
     gui = null;
   }
