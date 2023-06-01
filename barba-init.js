@@ -65,6 +65,7 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
+        console.log("barbaPrefetch is running:", data.next.container.dataset.barbaPrefetch);
       },
     },
   ],
