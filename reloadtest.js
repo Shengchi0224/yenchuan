@@ -1,4 +1,5 @@
 // custom.js
+let gui;
 function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
@@ -102,7 +103,17 @@ function reloadJS() {
       },
     },
   }).mount();
+  
+  if (gui) {
+    gui.destroy();
+    gui = null;
+  }
+
+  // Create a new instance of dat.gui for the home page
+  if (window.location.pathname === "/") {
   reloadgui();
+  }
+}
 }
 // Call the necessary functions when the page is loaded
 function initial() {
