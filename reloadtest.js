@@ -103,7 +103,7 @@ function reloadJS() {
       },
     },
   }).mount();
-  
+
   if (gui) {
     gui.destroy();
     gui = null;
@@ -111,10 +111,10 @@ function reloadJS() {
 
   // Create a new instance of dat.gui for the home page
   if (window.location.pathname === "/") {
-  reloadgui();
+    reloadgui();
   }
 }
-}
+
 // Call the necessary functions when the page is loaded
 function initial() {
   animateElements();
