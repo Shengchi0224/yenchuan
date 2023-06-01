@@ -62,6 +62,19 @@ function animateElements() {
 
 let gui = null;
 
+function createGui() {
+  reloadgui();
+}
+
+function destroyGui() {
+  // Destroy the dat.gui instance
+ if (gui) {
+    gui.destroy();
+    gui = null;
+    console.log('Destroying dat.gui instance');
+  }
+}
+
 function reloadJS() {
   // Reload all necessary JavaScript files
   resetWebflow();
@@ -105,15 +118,10 @@ function reloadJS() {
     },
   }).mount();
 
-  if (gui) {
-    console.log('Destroying dat.gui instance');
-    gui.destroy();
-    gui = null;
-  }
-
-  // Create a new instance of dat.gui for the home page
-  if (window.location.pathname === "/") {
-    reloadgui();
+  if (window.location.pathname === '/') {
+    createGui();
+  } else {
+    destroyGui();
   }
 }
 
@@ -159,15 +167,10 @@ function initial() {
     },
   }).mount();
 
-  if (gui) {
-    console.log('Destroying dat.gui instance');
-    gui.destroy();
-    gui = null;
-  }
-
-  // Create a new instance of dat.gui for the home page
-  if (window.location.pathname === "/") {
-    reloadgui();
+  if (window.location.pathname === '/') {
+    createGui();
+  } else {
+    destroyGui();
   }
 }
 
