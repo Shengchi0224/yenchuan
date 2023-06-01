@@ -102,6 +102,7 @@ function reloadJS() {
       },
     },
   }).mount();
+  reloadgui();
 }
 // Call the necessary functions when the page is loaded
 function initial() {
