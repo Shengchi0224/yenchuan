@@ -157,7 +157,17 @@ function initial() {
       },
     },
   }).mount();
-  reloadgui();
+
+  if (gui) {
+    console.log('Destroying dat.gui instance');
+    gui.destroy();
+    gui = null;
+  }
+
+  // Create a new instance of dat.gui for the home page
+  if (window.location.pathname === "/") {
+    reloadgui();
+  }
 }
 
 // Call the initial function when the page is loaded
