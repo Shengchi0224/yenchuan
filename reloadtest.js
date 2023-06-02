@@ -61,18 +61,19 @@ function animateElements() {
 }
 
 let gui = null;
+var guiInitialized = false;
 
 function createGui() {
-  if (!gui) {
-    gui = new dat.GUI();
+  if (!guiInitialized) {
+    guiInitialized = true;
     reloadgui();
   }
 }
 
 function destroyGui() {
-  if (gui) {
+  if (guiInitialized) {
+    guiInitialized = false;
     gui.destroy();
-    gui = null;
     console.log('Destroying dat.gui instance');
   }
 }
