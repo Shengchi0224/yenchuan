@@ -1,4 +1,3 @@
-// custom.js
 function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
@@ -298,12 +297,60 @@ function resize() {
   setup();
 }
 
-window.onresize = resize;
+window.addEventListener('DOMContentLoaded', function() {
+  // Call the necessary functions when the page is loaded
+  animateElements();
+  reloadGSAP();
+  resetWebflow();
+  new Splide('.splide', {
+    perPage: 4,
+    perMove: 1,
+    focus: 0,
+    type: 'loop',
+    gap: '2.66%',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 600,
+    dragAngleThreshold: 30,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: {
+        // Tablet
+        perPage: 2,
+        gap: '3vw',
+      },
+      767: {
+        // Mobile Landscape
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+      479: {
+        // Mobile Portrait
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+    },
+  }).mount();
+  createGui();
 
-can.ontouchmove = function (e) {
+  can = document.getElementById('can');
+  ctx = can.getContext('2d');
+  resize();
+});
+
+window.addEventListener('resize', resize);
+
+can.ontouchmove = function(e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
-      setTimeout(function () {
+      setTimeout(function() {
         if (i < window.arr.length)
           window.arr[i].target = {
             x: e.clientX,
@@ -315,10 +362,10 @@ can.ontouchmove = function (e) {
   }
 };
 
-can.onmousemove = function (e) {
+can.onmousemove = function(e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
-      setTimeout(function () {
+      setTimeout(function() {
         if (i < window.arr.length)
           window.arr[i].target = {
             x: e.clientX,
@@ -328,7 +375,7 @@ can.onmousemove = function (e) {
     }
     timeout(i);
   }
-}
+};
 
 function reloadJS() {
   // Reload all necessary JavaScript files
@@ -375,8 +422,8 @@ function reloadJS() {
   reloadgui();
 }
 
-// Call the necessary functions when the page is loaded
-function initial() {
+// Call the initial function when the page is loaded
+window.addEventListener('DOMContentLoaded', function() {
   animateElements();
   reloadGSAP();
   resetWebflow();
@@ -417,10 +464,7 @@ function initial() {
     },
   }).mount();
   createGui();
-  }
-
-// Call the initial function when the page is loaded
-window.addEventListener("DOMContentLoaded", initial);
+});
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
@@ -432,6 +476,45 @@ barba.hooks.after((data) => {
     reloadJS();
   } else {
     // Initial page load
-    initial();
+    animateElements();
+    reloadGSAP();
+    resetWebflow();
+    new Splide('.splide', {
+      perPage: 4,
+      perMove: 1,
+      focus: 0,
+      type: 'loop',
+      gap: '2.66%',
+      arrows: 'slider',
+      pagination: 'slider',
+      speed: 600,
+      dragAngleThreshold: 30,
+      autoWidth: false,
+      rewind: false,
+      rewindSpeed: 400,
+      waitForTransition: false,
+      updateOnMove: true,
+      trimSpace: false,
+      breakpoints: {
+        991: {
+          // Tablet
+          perPage: 2,
+          gap: '3vw',
+        },
+        767: {
+          // Mobile Landscape
+          perPage: 1,
+          gap: '2.5vw',
+          autoWidth: true, // for cards with differing widths
+        },
+        479: {
+          // Mobile Portrait
+          perPage: 1,
+          gap: '2.5vw',
+          autoWidth: true, // for cards with differing widths
+        },
+      },
+    }).mount();
+    createGui();
   }
 });
