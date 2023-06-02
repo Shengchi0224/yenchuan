@@ -176,8 +176,11 @@ function initial() {
   }
 }
 
-// Keep track of whether the GUI is initialized
-let guiInitialized = false;
+// Call the initial function when the page is loaded
+window.addEventListener("DOMContentLoaded", () => {
+  console.log('DOMContentLoaded - Initial function called');
+  initial();
+});
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
@@ -187,35 +190,13 @@ barba.hooks.after((data) => {
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
 
-  if (data.current && data.current.namespace === 'home') {
-    // Page transition occurred and current page is home
-    console.log('Page transition occurred and current page is home');
+  if (data.current) {
+    // Page transition occurred
+    console.log('Page transition occurred');
     reloadJS();
-    if (!guiInitialized) {
-      createGui();
-      guiInitialized = true;
-      console.log('GUI created');
-    }
-  } else if (data.next && data.next.namespace === 'home') {
-    // Navigating back to the home page
-    console.log('Navigating back to the home page');
-    setTimeout(() => {
-      console.log('Setting up the initial page');
-      initial();
-      animateElements(); // Re-animate elements
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-        console.log('GUI created');
-      }
-    }, 0);
   } else {
-    // Navigating to a new page or leaving the home page
-    console.log('Navigating to a new page or leaving the home page');
-    if (guiInitialized) {
-      destroyGui();
-      guiInitialized = false;
-      console.log('GUI destroyed');
-    }
+    // Initial page load
+    console.log('Initial page load');
+    initial();
   }
 });
