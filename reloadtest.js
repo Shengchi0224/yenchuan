@@ -120,8 +120,14 @@ function reloadJS() {
             },
         }).mount();
     if (window.location.pathname !== '/') {
-        destroyGui();
-    } else {
+    // Code to stop the animation goes here
+    // For example, you can use GSAP methods to pause or reset the animation
+    // Example: gsap.timeline().pause();
+    // Example: gsap.timeline().kill();
+
+    // Destroy the GUI if it was created on the home page
+    destroyGui();
+  }else {
         createGui();
     }
 }
@@ -167,9 +173,15 @@ function initial() {
                 },
             },
         }).mount();
-    if (window.location.pathname !== '/') {
-        destroyGui();
-    } else {
+  if (window.location.pathname !== '/') {
+    // Code to stop the animation goes here
+    // For example, you can use GSAP methods to pause or reset the animation
+    // Example: gsap.timeline().pause();
+    // Example: gsap.timeline().kill();
+
+    // Destroy the GUI if it was created on the home page
+    destroyGui();
+  }else {
         createGui();
     }
 }
