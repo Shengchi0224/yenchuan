@@ -61,19 +61,18 @@ function animateElements() {
 }
 
 let gui = null;
-var guiInitialized = false;
 
 function createGui() {
-  if (!guiInitialized) {
-    guiInitialized = true;
+  if (!gui) {
+    gui = new dat.GUI();
     reloadgui();
   }
 }
 
 function destroyGui() {
-  if (guiInitialized) {
-    guiInitialized = false;
+  if (gui) {
     gui.destroy();
+    gui = null;
     console.log('Destroying dat.gui instance');
   }
 }
@@ -173,8 +172,7 @@ function initial() {
 // Call the initial function when the page is loaded
 window.addEventListener("DOMContentLoaded", initial);
 
-// Keep track of the previous URL
-let previousURL = '';
+let guiInitialized = false;
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
@@ -186,25 +184,25 @@ barba.hooks.after((data) => {
     reloadJS();
 
     if (window.location.pathname === '/') {
-      createGui();
+      if (!guiInitialized) {
+        createGui();
+        guiInitialized = true;
+      }
     } else {
       destroyGui();
+      guiInitialized = false;
     }
-  } else if (previousURL === window.location.pathname) {
-    // Navigating back to the same page
-    reloadJS();
-
-    if (window.location.pathname === '/') {
-      createGui();
-    } else {
-      destroyGui();
-    }
-  } else if (window.location.pathname === '/') {
-    // Navigating back to the home page
+  } else {
+    // Initial page load or returning to the home page
     initial();
-    createGui();
+    if (window.location.pathname === '/') {
+      if (!guiInitialized) {
+        createGui();
+        guiInitialized = true;
+      }
+    } else {
+      destroyGui();
+      guiInitialized = false;
+    }
   }
-
-  // Store the current URL as the previous URL
-  previousURL = window.location.pathname;
 });
