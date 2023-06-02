@@ -131,6 +131,10 @@ class Circle {
 
 function initCanvas() {
   can = document.getElementById("can");
+  if (!can) {
+    console.error("Canvas element not found!");
+    return;
+  }
   ctx = can.getContext("2d");
 }
 
@@ -292,6 +296,11 @@ function draw() {
 }
 
 function resize() {
+  can = document.getElementById("can");
+  if (!can) {
+    console.error("Canvas element not found!");
+    return;
+  }
   can.width = window.innerWidth;
   can.height = window.innerHeight;
   setup();
