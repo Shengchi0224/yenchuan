@@ -80,6 +80,9 @@ function destroyGui() {
 }
 
 function reloadJS() {
+  resetWebflow();
+  reloadGSAP();
+  animateElements();
     if (window.location.pathname !== '/') {
         // Code to stop the animation goes here
         // For example, you can use GSAP methods to pause or reset the animation
@@ -89,10 +92,6 @@ function reloadJS() {
         // Destroy the GUI if it was created on the home page
         destroyGui();
     } else {
-        // Reload all necessary JavaScript files
-        resetWebflow();
-        reloadGSAP();
-        animateElements();
         // Add any additional JavaScript files or functions to reload here
         new Splide('.splide', {
             perPage: 4,
