@@ -169,6 +169,11 @@ function initial() {
       },
     },
   }).mount();
+  if (window.location.pathname === '/') {
+    createGui();
+  } else {
+    destroyGui();
+  }
 }
 
 // Call the initial function when the page is loaded
@@ -200,6 +205,7 @@ barba.hooks.after((data) => {
     setTimeout(() => {
       console.log('Setting up the initial page');
       initial();
+      animateElements(); // Re-animate elements
       if (!guiInitialized) {
         createGui();
         guiInitialized = true;
