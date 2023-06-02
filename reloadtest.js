@@ -292,20 +292,17 @@ function draw() {
 }
 
 function resize() {
-  can = document.getElementById("can");
-  if (can) {
-    can.width = window.innerWidth;
-    can.height = window.innerHeight;
-    setup();
-  }
+  can.width = window.innerWidth;
+  can.height = window.innerHeight;
+  setup();
 }
 
 window.addEventListener("resize", resize);
 
-can.addEventListener("mousemove", function(e) {
+can.addEventListener("mousemove", function (e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
-      setTimeout(function() {
+      setTimeout(function () {
         if (i < arr.length)
           arr[i].target = {
             x: e.clientX,
@@ -317,10 +314,10 @@ can.addEventListener("mousemove", function(e) {
   }
 });
 
-can.addEventListener("touchmove", function(e) {
+can.addEventListener("touchmove", function (e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
-      setTimeout(function() {
+      setTimeout(function () {
         if (i < arr.length)
           arr[i].target = {
             x: e.touches[0].clientX,
@@ -336,13 +333,86 @@ function reloadJS() {
   resetWebflow();
   reloadGSAP();
   animateElements();
-  // Additional JavaScript code to reload can be added here
+  // Add any additional JavaScript files or functions to reload here
+  new Splide('.splide', {
+    perPage: 4,
+    perMove: 1,
+    focus: 0,
+    type: 'loop',
+    gap: '2.66%',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 600,
+    dragAngleThreshold: 30,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: {
+        // Tablet
+        perPage: 2,
+        gap: '3vw',
+      },
+      767: {
+        // Mobile Landscape
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+      479: {
+        // Mobile Portrait
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+    },
+  }).mount();
+  reloadgui();
 }
 
 function initial() {
   animateElements();
   reloadGSAP();
   resetWebflow();
+  new Splide('.splide', {
+    perPage: 4,
+    perMove: 1,
+    focus: 0,
+    type: 'loop',
+    gap: '2.66%',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 600,
+    dragAngleThreshold: 30,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: {
+        // Tablet
+        perPage: 2,
+        gap: '3vw',
+      },
+      767: {
+        // Mobile Landscape
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+      479: {
+        // Mobile Portrait
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+    },
+  }).mount();
   createGui();
 }
 
@@ -357,11 +427,3 @@ barba.hooks.after((data) => {
     initial();
   }
 });
-
-// Call the necessary functions when the page is loaded
-function onPageLoad() {
-  resize();
-  initial();
-}
-
-onPageLoad();
