@@ -2,10 +2,6 @@ var arr = [];
 
 function reloadgui() {
 var can = document.getElementById("can");
-  if (!can) {
-    destroyGui(); // Destroy the dat.gui instance if canvas doesn't exist
-    return;
-  }
 var ctx = can.getContext("2d");
 
 var grid = [];
@@ -210,8 +206,7 @@ function draw() {
 function resize() {
     can.width = window.innerWidth;
     can.height = window.innerHeight;
-    setup();
-    reloadgui();
+	setup();
 }
 window.onresize = resize;
 
