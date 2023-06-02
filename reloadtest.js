@@ -181,11 +181,6 @@ barba.hooks.after((data) => {
   if (data.current) {
     // Page transition occurred
     reloadJS();
-    if (window.location.pathname === '/') {
-      createGui();
-    } else {
-      destroyGui();
-    }
   } else {
     // Initial page load
     initial();
