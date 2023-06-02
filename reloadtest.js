@@ -80,10 +80,18 @@ function destroyGui() {
 }
 
 function reloadJS() {
-  resetWebflow();
-  reloadGSAP();
-  animateElements();
+    resetWebflow();
+    reloadGSAP();
+    animateElements();
+    animateElements();
     if (window.location.pathname !== '/') {
+        const splideElement = document.querySelector('.splide');
+        if (splideElement && splideElement.splide) {
+            splideElement.splide.destroy();
+
+            // Console log when the Splide slider is destroyed
+            console.log('Splide slider destroyed!');
+        }
         // Code to stop the animation goes here
         // For example, you can use GSAP methods to pause or reset the animation
         // Example: gsap.timeline().pause();
@@ -135,10 +143,18 @@ function reloadJS() {
 
 // Call the necessary functions when the page is loaded
 function initial() {
-  resetWebflow();
-  reloadGSAP();
-  animateElements();
+    resetWebflow();
+    reloadGSAP();
+    animateElements();
+    animateElements();
     if (window.location.pathname !== '/') {
+        const splideElement = document.querySelector('.splide');
+        if (splideElement && splideElement.splide) {
+            splideElement.splide.destroy();
+
+            // Console log when the Splide slider is destroyed
+            console.log('Splide slider destroyed!');
+        }
         // Code to stop the animation goes here
         // For example, you can use GSAP methods to pause or reset the animation
         // Example: gsap.timeline().pause();
