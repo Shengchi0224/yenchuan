@@ -177,47 +177,35 @@ let guiInitialized = false;
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
+  console.log('barba.hooks.after - Current:', data.current);
+  console.log('barba.hooks.after - Next:', data.next);
+
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
 
-  console.log('barba.hooks.after');
-  console.log('Current:', data.current);
-  console.log('Next:', data.next);
-
-  if (data.current) {
-    // Page transition occurred
-    console.log('Page transition occurred');
+  if (data.current && data.current.namespace === 'home') {
+    // Page transition occurred and current page is home
+    console.log('Page transition occurred and current page is home');
     reloadJS();
-
-    if (window.location.pathname === '/') {
-      console.log('Current page is home');
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-        console.log('GUI created');
-      }
-    } else {
-      console.log('Leaving home page');
-      destroyGui();
-      guiInitialized = false;
-      console.log('GUI destroyed');
+    if (!guiInitialized) {
+      createGui();
+      guiInitialized = true;
+      console.log('GUI created');
     }
+  } else if (data.next && data.next.namespace === 'home') {
+    // Navigating back to the home page
+    console.log('Navigating back to the home page');
+    setTimeout(() => {
+      initial();
+      createGui();
+      guiInitialized = true;
+      console.log('Initial function called and GUI created');
+    }, 0);
   } else {
-    // Navigating to a new page
-    console.log('Navigating to a new page');
-    initial();
-    if (window.location.pathname === '/') {
-      console.log('Current page is home');
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-        console.log('GUI created');
-      }
-    } else {
-      console.log('Leaving home page');
-      destroyGui();
-      guiInitialized = false;
-      console.log('GUI destroyed');
-    }
+    // Navigating to a new page or leaving the home page
+    console.log('Navigating to a new page or leaving the home page');
+    destroyGui();
+    guiInitialized = false;
+    console.log('GUI destroyed');
   }
 });
