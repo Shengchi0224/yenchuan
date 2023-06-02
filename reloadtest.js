@@ -176,9 +176,6 @@ function initial() {
   }
 }
 
-// Call the initial function when the page is loaded
-window.addEventListener("DOMContentLoaded", initial);
-
 // Keep track of whether the GUI is initialized
 let guiInitialized = false;
 
