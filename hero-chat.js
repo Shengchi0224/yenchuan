@@ -258,6 +258,7 @@ function reloadgui() {
 function resize() {
     can.width = window.innerWidth;
     can.height = window.innerHeight;
+    setup();
     reloadgui();
 }
 window.onresize = resize;
