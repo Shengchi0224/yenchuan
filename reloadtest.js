@@ -60,20 +60,18 @@ function animateElements() {
   );
 }
 
-
 let gui = null;
 
 function createGui() {
   if (!gui) {
-  reloadgui();
+    gui = new dat.GUI();
+    reloadgui();
   }
 }
 
 function destroyGui() {
   if (gui) {
     gui.destroy();
-    const guiElement = gui.domElement.parentNode;
-    guiElement.parentNode.removeChild(guiElement);
     gui = null;
     console.log('Destroying dat.gui instance');
   }
@@ -121,12 +119,6 @@ function reloadJS() {
       },
     },
   }).mount();
-
-  if (window.location.pathname === '/') {
-    createGui();
-  } else {
-    destroyGui();
-  }
 }
 
 // Call the necessary functions when the page is loaded
@@ -189,6 +181,11 @@ barba.hooks.after((data) => {
   if (data.current) {
     // Page transition occurred
     reloadJS();
+    if (window.location.pathname === '/') {
+      createGui();
+    } else {
+      destroyGui();
+    }
   } else {
     // Initial page load
     initial();
