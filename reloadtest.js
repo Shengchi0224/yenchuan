@@ -80,10 +80,21 @@ function destroyGui() {
 }
 
 function reloadJS() {
-    resetWebflow();
-    reloadGSAP();
-    animateElements();
-    new Splide('.splide', {
+    if (window.location.pathname !== '/') {
+        // Code to stop the animation goes here
+        // For example, you can use GSAP methods to pause or reset the animation
+        // Example: gsap.timeline().pause();
+        // Example: gsap.timeline().kill();
+
+        // Destroy the GUI if it was created on the home page
+        destroyGui();
+    } else {
+        // Reload all necessary JavaScript files
+        resetWebflow();
+        reloadGSAP();
+        animateElements();
+        // Add any additional JavaScript files or functions to reload here
+        new Splide('.splide', {
             perPage: 4,
             perMove: 1,
             focus: 0,
@@ -119,71 +130,56 @@ function reloadJS() {
                 },
             },
         }).mount();
-    if (window.location.pathname !== '/') {
-    // Code to stop the animation goes here
-    // For example, you can use GSAP methods to pause or reset the animation
-    // Example: gsap.timeline().pause();
-    // Example: gsap.timeline().kill();
-
-    // Destroy the GUI if it was created on the home page
-    destroyGui();
-  }else {
         createGui();
     }
 }
 
 // Call the necessary functions when the page is loaded
 function initial() {
-    resetWebflow();
-    reloadGSAP();
-    animateElements();
-    new Splide('.splide', {
-            perPage: 4,
-            perMove: 1,
-            focus: 0,
-            type: 'loop',
-            gap: '2.66%',
-            arrows: 'slider',
-            pagination: 'slider',
-            speed: 600,
-            dragAngleThreshold: 30,
-            autoWidth: false,
-            rewind: false,
-            rewindSpeed: 400,
-            waitForTransition: false,
-            updateOnMove: true,
-            trimSpace: false,
-            breakpoints: {
-                991: {
-                    // Tablet
-                    perPage: 2,
-                    gap: '3vw',
-                },
-                767: {
-                    // Mobile Landscape
-                    perPage: 1,
-                    gap: '2.5vw',
-                    autoWidth: true, // for cards with differing widths
-                },
-                479: {
-                    // Mobile Portrait
-                    perPage: 1,
-                    gap: '2.5vw',
-                    autoWidth: true, // for cards with differing widths
-                },
-            },
-        }).mount();
-  if (window.location.pathname !== '/') {
-    // Code to stop the animation goes here
-    // For example, you can use GSAP methods to pause or reset the animation
-    // Example: gsap.timeline().pause();
-    // Example: gsap.timeline().kill();
-
-    // Destroy the GUI if it was created on the home page
+  animateElements();
+  reloadGSAP();
+  resetWebflow();
+  new Splide('.splide', {
+    perPage: 4,
+    perMove: 1,
+    focus: 0,
+    type: 'loop',
+    gap: '2.66%',
+    arrows: 'slider',
+    pagination: 'slider',
+    speed: 600,
+    dragAngleThreshold: 30,
+    autoWidth: false,
+    rewind: false,
+    rewindSpeed: 400,
+    waitForTransition: false,
+    updateOnMove: true,
+    trimSpace: false,
+    breakpoints: {
+      991: {
+        // Tablet
+        perPage: 2,
+        gap: '3vw',
+      },
+      767: {
+        // Mobile Landscape
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+      479: {
+        // Mobile Portrait
+        perPage: 1,
+        gap: '2.5vw',
+        autoWidth: true, // for cards with differing widths
+      },
+    },
+  }).mount();
+  if (window.location.pathname === '/') {
+    createGui();
+  } else {
     destroyGui();
-  }else {
-        createGui();
-    }
+  }
 }
 
 // Call the initial function when the page is loaded
