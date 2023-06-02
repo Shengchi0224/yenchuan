@@ -60,6 +60,13 @@ function animateElements() {
   );
 }
 
+const settings = {
+  "grid size": 5,
+  circles: 80,
+  delay: 50,
+  show: false,
+};
+
 let gui = null;
 
 function createGui() {
