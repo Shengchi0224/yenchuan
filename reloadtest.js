@@ -129,7 +129,7 @@ function reloadJS() {
                 },
             },
         }).mount();
-        createGui();
+        setTimeout(() => { createGui(); }, 1000);
     }
 }
 
@@ -175,7 +175,7 @@ function initial() {
     },
   }).mount();
   if (window.location.pathname === '/') {
-    createGui();
+    setTimeout(() => { createGui(); }, 1000);
   } else {
     destroyGui();
   }
