@@ -168,12 +168,6 @@ function initial() {
       },
     },
   }).mount();
-
-  if (window.location.pathname === '/') {
-    createGui();
-  } else {
-    destroyGui();
-  }
 }
 
 // Call the initial function when the page is loaded
@@ -187,8 +181,9 @@ barba.hooks.after((data) => {
   if (data.current) {
     // Page transition occurred
     reloadJS();
-  } else {
-    // Initial page load
+  } else if (data.next.url.pathname === '/') {
+    // Navigating back to the home page
     initial();
+    createGui();
   }
 });
