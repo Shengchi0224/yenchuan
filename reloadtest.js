@@ -172,9 +172,6 @@ function initial() {
 // Call the initial function when the page is loaded
 window.addEventListener("DOMContentLoaded", initial);
 
-let guiInitialized = false;
-
-// Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
@@ -184,25 +181,15 @@ barba.hooks.after((data) => {
     reloadJS();
 
     if (window.location.pathname === '/') {
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-      }
+      createGui();
     } else {
       destroyGui();
-      guiInitialized = false;
     }
-  } else {
-    // Initial page load or returning to the home page
-    initial();
-    if (window.location.pathname === '/') {
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-      }
-    } else {
-      destroyGui();
-      guiInitialized = false;
-    }
+  } else if (data.next.url.pathname === '/') {
+    // Navigating back to the home page
+    setTimeout(() => {
+      initial();
+      createGui();
+    }, 0);
   }
 });
