@@ -180,35 +180,16 @@ barba.hooks.after((data) => {
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
 
-  if (data.current) {
-    // Page transition occurred
+  if (data.current.namespace === 'home') {
+    // Page transition occurred and current page is home
     reloadJS();
-
-    if (window.location.pathname === '/') {
-      if (data.next && data.next.namespace === 'home') {
-        if (!guiInitialized) {
-          createGui();
-          guiInitialized = true;
-        }
-      } else {
-        destroyGui();
-        guiInitialized = false;
-      }
-    } else {
-      destroyGui();
-      guiInitialized = false;
+    if (!guiInitialized) {
+      createGui();
+      guiInitialized = true;
     }
   } else {
-    // Navigating to a new page
-    initial();
-    if (window.location.pathname === '/') {
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
-      }
-    } else {
-      destroyGui();
-      guiInitialized = false;
-    }
+    // Navigating to a new page or leaving the home page
+    destroyGui();
+    guiInitialized = false;
   }
 });
