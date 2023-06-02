@@ -60,7 +60,6 @@ function animateElements() {
     }
   );
 }
-
 var arr = [];
 var can = null;
 var ctx = null;
@@ -73,6 +72,11 @@ var settings = {
   show: false,
 };
 var settings_copy = {};
+
+function initCanvas() {
+  can = document.getElementById("can");
+  ctx = can.getContext("2d");
+}
 
 function createGui() {
   var g = new dat.GUI();
@@ -129,11 +133,6 @@ class Circle {
     ctx.stroke();
     ctx.closePath();
   }
-}
-
-function initCanvas() {
-  can = document.getElementById("can");
-  ctx = can.getContext("2d");
 }
 
 function setup() {
@@ -299,9 +298,14 @@ function resize() {
   setup();
 }
 
-window.addEventListener("resize", resize); // Changed from onresize to addEventListener
+window.addEventListener('DOMContentLoaded', function() {
+  initCanvas();
+  createGui();
+  resize();
+  window.addEventListener('resize', resize);
+});
 
-can.addEventListener("mousemove", function (e) { // Changed from onmousemove to addEventListener
+can.ontouchmove = function (e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
       setTimeout(function () {
@@ -314,22 +318,22 @@ can.addEventListener("mousemove", function (e) { // Changed from onmousemove to 
     }
     timeout(i);
   }
-});
+};
 
-can.addEventListener("touchmove", function (e) { // Added touchmove event listener
+can.onmousemove = function (e) {
   for (var i = 0; i < settings.circles; ++i) {
     function timeout(i) {
       setTimeout(function () {
         if (i < window.arr.length)
           window.arr[i].target = {
-            x: e.touches[0].clientX,
-            y: e.touches[0].clientY,
+            x: e.clientX,
+            y: e.clientY,
           };
       }, i * settings.delay);
     }
     timeout(i);
   }
-});
+};
 
 function reloadJS() {
   // Reload all necessary JavaScript files
