@@ -190,7 +190,16 @@ barba.hooks.after((data) => {
     } else {
       destroyGui();
     }
-  } else if (previousURL === '/') {
+  } else if (previousURL === window.location.pathname) {
+    // Navigating back to the same page
+    reloadJS();
+
+    if (window.location.pathname === '/') {
+      createGui();
+    } else {
+      destroyGui();
+    }
+  } else if (window.location.pathname === '/') {
     // Navigating back to the home page
     initial();
     createGui();
