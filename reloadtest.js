@@ -91,12 +91,6 @@ function reloadJS() {
             // Console log when the Splide slider is destroyed
             console.log('Splide slider cleared!');
         }
-        // Code to stop the animation goes here
-        // For example, you can use GSAP methods to pause or reset the animation
-        // Example: gsap.timeline().pause();
-        // Example: gsap.timeline().kill();
-
-        // Destroy the GUI if it was created on the home page
         destroyGui();
     } else {
         const splideElement = document.querySelector('.splide');
