@@ -60,22 +60,12 @@ function animateElements() {
   );
 }
 
-const settings = {
-  "grid size": 5,
-  circles: 80,
-  delay: 50,
-  show: false,
-};
 
 let gui = null;
 
 function createGui() {
   if (!gui) {
-    gui = new dat.GUI();
-    gui.add(settings, "grid size", 3, 30).step(1);
-    gui.add(settings, "circles", 1, 100).step(1);
-    gui.add(settings, "delay", 1, 1000).step(1);
-    gui.add(settings, "show");
+  reloadgui();
   }
 }
 
