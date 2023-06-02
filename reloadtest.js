@@ -292,9 +292,12 @@ function draw() {
 }
 
 function resize() {
-  can.width = window.innerWidth;
-  can.height = window.innerHeight;
-  setup();
+  can = document.getElementById("can");
+  if (can) {
+    can.width = window.innerWidth;
+    can.height = window.innerHeight;
+    setup();
+  }
 }
 
 window.addEventListener("resize", resize);
