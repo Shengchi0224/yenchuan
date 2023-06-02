@@ -1,3 +1,4 @@
+// custom.js
 function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
@@ -65,7 +66,7 @@ var ctx = null;
 var grid = [];
 let drag = 1000;
 var settings = {
-  "grid size": 5,
+  'grid size': 5,
   circles: 80,
   delay: 50,
   show: false,
@@ -74,10 +75,10 @@ var settings_copy = {};
 
 function createGui() {
   var g = new dat.GUI();
-  g.add(settings, "grid size", 3, 30).step(1);
-  g.add(settings, "circles", 1, 100).step(1);
-  g.add(settings, "delay", 1, 1000).step(1);
-  g.add(settings, "show");
+  g.add(settings, 'grid size', 3, 30).step(1);
+  g.add(settings, 'circles', 1, 100).step(1);
+  g.add(settings, 'delay', 1, 1000).step(1);
+  g.add(settings, 'show');
 
   initCanvas();
   setup();
@@ -122,7 +123,7 @@ class Circle {
   }
   draw() {
     ctx.beginPath();
-    ctx.strokeStyle = "#000";
+    ctx.strokeStyle = '#000';
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI * 2);
     ctx.stroke();
     ctx.closePath();
@@ -130,8 +131,8 @@ class Circle {
 }
 
 function initCanvas() {
-  can = document.getElementById("can");
-  ctx = can.getContext("2d");
+  can = document.getElementById('can');
+  ctx = can.getContext('2d');
 }
 
 function setup() {
@@ -141,18 +142,18 @@ function setup() {
     var circ = new Circle();
     arr.push(circ);
   }
-  for (var i = 0; i < can.width; i += settings["grid size"]) {
+  for (var i = 0; i < can.width; i += settings['grid size']) {
     grid.push([]);
-    for (var j = 0; j < can.height; j += settings["grid size"]) {
-      grid[i / settings["grid size"]].push(0.0);
+    for (var j = 0; j < can.height; j += settings['grid size']) {
+      grid[i / settings['grid size']].push(0.0);
     }
   }
 }
 
 function lerp(p1, p2) {
   return {
-    x: p2.x + (p1.x - p2.x) * ((1.0 - grid[p2.x / settings["grid size"]][p2.y / settings["grid size"]]) / (grid[p1.x / settings["grid size"]][p1.y / settings["grid size"]] - grid[p2.x / settings["grid size"]][p2.y / settings["grid size"]])),
-    y: p2.y + (p1.y - p2.y) * ((1.0 - grid[p2.x / settings["grid size"]][p2.y / settings["grid size"]]) / (grid[p1.x / settings["grid size"]][p1.y / settings["grid size"]] - grid[p2.x / settings["grid size"]][p2.y / settings["grid size"]])),
+    x: p2.x + (p1.x - p2.x) * ((1.0 - grid[p2.x / settings['grid size']][p2.y / settings['grid size']]) / (grid[p1.x / settings['grid size']][p1.y / settings['grid size']] - grid[p2.x / settings['grid size']][p2.y / settings['grid size']])),
+    y: p2.y + (p1.y - p2.y) * ((1.0 - grid[p2.x / settings['grid size']][p2.y / settings['grid size']]) / (grid[p1.x / settings['grid size']][p1.y / settings['grid size']] - grid[p2.x / settings['grid size']][p2.y / settings['grid size']])),
   };
 }
 
@@ -167,28 +168,28 @@ function draw() {
       setup();
       settings_copy = Object.assign({}, settings);
     }
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, can.width, can.height);
     for (var i = 0; i < settings.circles; ++i) {
       arr[i].update(i);
       settings.show && arr[i].draw();
     }
-    for (var i = 0; i < can.width; i += settings["grid size"]) {
-      for (var j = 0; j < can.height; j += settings["grid size"]) {
+    for (var i = 0; i < can.width; i += settings['grid size']) {
+      for (var j = 0; j < can.height; j += settings['grid size']) {
         var v = 0;
         for (var k = 0; k < settings.circles; ++k) {
           v += (arr[k].radius * arr[k].radius) / (((arr[k].x - i) * (arr[k].x - i)) + ((arr[k].y - j) * (arr[k].y - j)));
         }
-        grid[(i / settings["grid size"])][(j / settings["grid size"])] = v;
+        grid[i / settings['grid size']][j / settings['grid size']] = v;
       }
     }
     var threshold = 1.0;
-    for (var i = 0; i < can.width - settings["grid size"]; i += settings["grid size"]) {
-      for (var j = 0; j < can.height - settings["grid size"]; j += settings["grid size"]) {
-        var a = grid[i / settings["grid size"]][j / settings["grid size"]] >= threshold;
-        var b = grid[i / settings["grid size"]][(j + settings["grid size"]) / settings["grid size"]] >= threshold;
-        var c = grid[(i + settings["grid size"]) / settings["grid size"]][(j + settings["grid size"]) / settings["grid size"]] >= threshold;
-        var d = grid[(i + settings["grid size"]) / settings["grid size"]][j / settings["grid size"]] >= threshold;
+    for (var i = 0; i < can.width - settings['grid size']; i += settings['grid size']) {
+      for (var j = 0; j < can.height - settings['grid size']; j += settings['grid size']) {
+        var a = grid[i / settings['grid size']][j / settings['grid size']] >= threshold;
+        var b = grid[i / settings['grid size']][(j + settings['grid size']) / settings['grid size']] >= threshold;
+        var c = grid[(i + settings['grid size']) / settings['grid size']][(j + settings['grid size']) / settings['grid size']] >= threshold;
+        var d = grid[(i + settings['grid size']) / settings['grid size']][j / settings['grid size']] >= threshold;
         if (a + b + c + d == 0 || a + b + c + d == 4) continue;
         var ap = {
           x: i,
@@ -196,14 +197,14 @@ function draw() {
         };
         var bp = {
           x: i,
-          y: j + settings["grid size"],
+          y: j + settings['grid size'],
         };
         var cp = {
-          x: i + settings["grid size"],
-          y: j + settings["grid size"],
+          x: i + settings['grid size'],
+          y: j + settings['grid size'],
         };
         var dp = {
-          x: i + settings["grid size"],
+          x: i + settings['grid size'],
           y: j,
         };
         var p1, p2, p3, p4, temp;
@@ -277,7 +278,7 @@ function draw() {
         }
         if (p1 != undefined && p2 != undefined) {
           ctx.beginPath();
-          ctx.strokeStyle = "#D2AD7A";
+          ctx.strokeStyle = '#D2AD7A';
           ctx.moveTo(p1.x, p1.y);
           ctx.lineTo(p2.x, p2.y);
           ctx.stroke();
@@ -297,85 +298,7 @@ function resize() {
   setup();
 }
 
-window.addEventListener('DOMContentLoaded', function() {
-  // Call the necessary functions when the page is loaded
-  animateElements();
-  reloadGSAP();
-  resetWebflow();
-  new Splide('.splide', {
-    perPage: 4,
-    perMove: 1,
-    focus: 0,
-    type: 'loop',
-    gap: '2.66%',
-    arrows: 'slider',
-    pagination: 'slider',
-    speed: 600,
-    dragAngleThreshold: 30,
-    autoWidth: false,
-    rewind: false,
-    rewindSpeed: 400,
-    waitForTransition: false,
-    updateOnMove: true,
-    trimSpace: false,
-    breakpoints: {
-      991: {
-        // Tablet
-        perPage: 2,
-        gap: '3vw',
-      },
-      767: {
-        // Mobile Landscape
-        perPage: 1,
-        gap: '2.5vw',
-        autoWidth: true, // for cards with differing widths
-      },
-      479: {
-        // Mobile Portrait
-        perPage: 1,
-        gap: '2.5vw',
-        autoWidth: true, // for cards with differing widths
-      },
-    },
-  }).mount();
-  createGui();
-
-  can = document.getElementById('can');
-  ctx = can.getContext('2d');
-  resize();
-});
-
 window.addEventListener('resize', resize);
-
-can.ontouchmove = function(e) {
-  for (var i = 0; i < settings.circles; ++i) {
-    function timeout(i) {
-      setTimeout(function() {
-        if (i < window.arr.length)
-          window.arr[i].target = {
-            x: e.clientX,
-            y: e.clientY,
-          };
-      }, i * settings.delay);
-    }
-    timeout(i);
-  }
-};
-
-can.onmousemove = function(e) {
-  for (var i = 0; i < settings.circles; ++i) {
-    function timeout(i) {
-      setTimeout(function() {
-        if (i < window.arr.length)
-          window.arr[i].target = {
-            x: e.clientX,
-            y: e.clientY,
-          };
-      }, i * settings.delay);
-    }
-    timeout(i);
-  }
-};
 
 function reloadJS() {
   // Reload all necessary JavaScript files
@@ -422,8 +345,8 @@ function reloadJS() {
   reloadgui();
 }
 
-// Call the initial function when the page is loaded
-window.addEventListener('DOMContentLoaded', function() {
+// Call the necessary functions when the page is loaded
+function initial() {
   animateElements();
   reloadGSAP();
   resetWebflow();
@@ -464,57 +387,21 @@ window.addEventListener('DOMContentLoaded', function() {
     },
   }).mount();
   createGui();
-});
+}
+
+// Call the initial function when the page is loaded
+window.addEventListener('DOMContentLoaded', initial);
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
   // Perform necessary actions after page transition
-  $(window).scrollTop(0);
+  window.scrollTo(0, 0);
 
   if (data.current) {
     // Page transition occurred
     reloadJS();
   } else {
     // Initial page load
-    animateElements();
-    reloadGSAP();
-    resetWebflow();
-    new Splide('.splide', {
-      perPage: 4,
-      perMove: 1,
-      focus: 0,
-      type: 'loop',
-      gap: '2.66%',
-      arrows: 'slider',
-      pagination: 'slider',
-      speed: 600,
-      dragAngleThreshold: 30,
-      autoWidth: false,
-      rewind: false,
-      rewindSpeed: 400,
-      waitForTransition: false,
-      updateOnMove: true,
-      trimSpace: false,
-      breakpoints: {
-        991: {
-          // Tablet
-          perPage: 2,
-          gap: '3vw',
-        },
-        767: {
-          // Mobile Landscape
-          perPage: 1,
-          gap: '2.5vw',
-          autoWidth: true, // for cards with differing widths
-        },
-        479: {
-          // Mobile Portrait
-          perPage: 1,
-          gap: '2.5vw',
-          autoWidth: true, // for cards with differing widths
-        },
-      },
-    }).mount();
-    createGui();
+    initial();
   }
 });
