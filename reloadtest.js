@@ -72,6 +72,8 @@ function createGui() {
 function destroyGui() {
   if (gui) {
     gui.destroy();
+    const guiElement = gui.domElement.parentNode;
+    guiElement.parentNode.removeChild(guiElement);
     gui = null;
     console.log('Destroying dat.gui instance');
   }
