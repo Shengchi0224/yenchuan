@@ -173,6 +173,9 @@ function initial() {
 // Call the initial function when the page is loaded
 window.addEventListener("DOMContentLoaded", initial);
 
+// Keep track of the previous URL
+let previousURL = '';
+
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
   // Perform necessary actions after page transition
@@ -181,9 +184,18 @@ barba.hooks.after((data) => {
   if (data.current) {
     // Page transition occurred
     reloadJS();
-  } else if (data.next.url.pathname === '/') {
+
+    if (window.location.pathname === '/') {
+      createGui();
+    } else {
+      destroyGui();
+    }
+  } else if (previousURL === '/') {
     // Navigating back to the home page
     initial();
     createGui();
   }
+
+  // Store the current URL as the previous URL
+  previousURL = window.location.pathname;
 });
