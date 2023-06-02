@@ -85,11 +85,11 @@ function reloadJS() {
     animateElements();
     if (window.location.pathname !== '/') {
         const splideElement = document.querySelector('.splide');
-        if (splideElement && splideElement.splide) {
-            splideElement.splide.destroy();
+        if (splideElement) {
+            splideElement.style.display = 'none';
 
             // Console log when the Splide slider is destroyed
-            console.log('Splide slider destroyed!');
+            console.log('Splide slider cleared!');
         }
         // Code to stop the animation goes here
         // For example, you can use GSAP methods to pause or reset the animation
@@ -99,43 +99,9 @@ function reloadJS() {
         // Destroy the GUI if it was created on the home page
         destroyGui();
     } else {
-        // Add any additional JavaScript files or functions to reload here
-        new Splide('.splide', {
-            perPage: 4,
-            perMove: 1,
-            focus: 0,
-            type: 'loop',
-            gap: '2.66%',
-            arrows: 'slider',
-            pagination: 'slider',
-            speed: 600,
-            dragAngleThreshold: 30,
-            autoWidth: false,
-            rewind: false,
-            rewindSpeed: 400,
-            waitForTransition: false,
-            updateOnMove: true,
-            trimSpace: false,
-            breakpoints: {
-                991: {
-                    // Tablet
-                    perPage: 2,
-                    gap: '3vw',
-                },
-                767: {
-                    // Mobile Landscape
-                    perPage: 1,
-                    gap: '2.5vw',
-                    autoWidth: true, // for cards with differing widths
-                },
-                479: {
-                    // Mobile Portrait
-                    perPage: 1,
-                    gap: '2.5vw',
-                    autoWidth: true, // for cards with differing widths
-                },
-            },
-        }).mount();
+        const splideElement = document.querySelector('.splide');
+        if (splideElement) {
+        splideElement.style.display = 'block'; // Show the Splide slider}
         createGui();
     }
 }
@@ -145,24 +111,7 @@ function initial() {
     resetWebflow();
     reloadGSAP();
     animateElements();
-    if (window.location.pathname !== '/') {
-        const splideElement = document.querySelector('.splide');
-        if (splideElement && splideElement.splide) {
-            splideElement.splide.destroy();
-
-            // Console log when the Splide slider is destroyed
-            console.log('Splide slider destroyed!');
-        }
-        // Code to stop the animation goes here
-        // For example, you can use GSAP methods to pause or reset the animation
-        // Example: gsap.timeline().pause();
-        // Example: gsap.timeline().kill();
-
-        // Destroy the GUI if it was created on the home page
-        destroyGui();
-    } else {
-        // Add any additional JavaScript files or functions to reload here
-        new Splide('.splide', {
+    new Splide('.splide', {
             perPage: 4,
             perMove: 1,
             focus: 0,
@@ -198,6 +147,9 @@ function initial() {
                 },
             },
         }).mount();
+    if (window.location.pathname !== '/') {
+        destroyGui();
+    } else {
         createGui();
     }
 }
