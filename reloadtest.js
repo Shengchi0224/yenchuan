@@ -64,7 +64,6 @@ let gui = null;
 
 function createGui() {
   if (!gui) {
-    gui = new dat.GUI();
     reloadgui();
   }
 }
