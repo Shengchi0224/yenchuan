@@ -209,8 +209,10 @@ barba.hooks.after((data) => {
   } else {
     // Navigating to a new page or leaving the home page
     console.log('Navigating to a new page or leaving the home page');
-    destroyGui();
-    guiInitialized = false;
-    console.log('GUI destroyed');
+    if (guiInitialized) {
+      destroyGui();
+      guiInitialized = false;
+      console.log('GUI destroyed');
+    }
   }
 });
