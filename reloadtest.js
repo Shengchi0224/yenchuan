@@ -70,10 +70,12 @@ function createGui() {
 }
 
 function destroyGui() {
+  // Destroy the dat.gui instance
+  console.log('Destroying GUI');
   if (gui) {
     gui.destroy();
     gui = null;
-    console.log('Destroying dat.gui instance');
+    console.log('GUI destroyed');
   }
 }
 
