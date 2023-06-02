@@ -418,7 +418,6 @@ function initial() {
   }).mount();
   createGui();
   }
-}
 
 // Call the initial function when the page is loaded
 window.addEventListener("DOMContentLoaded", initial);
