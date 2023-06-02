@@ -210,7 +210,8 @@ function draw() {
 function resize() {
     can.width = window.innerWidth;
     can.height = window.innerHeight;
-	setup();
+    setup();
+    reloadgui();
 }
 window.onresize = resize;
 
