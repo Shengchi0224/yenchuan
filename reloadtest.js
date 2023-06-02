@@ -3,7 +3,7 @@ function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
   const parser = new DOMParser();
-  const dom = parser.parseFromString(webflowPageId, 'text/html');
+  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
   webflowPageId = $(dom).find('body').text();
   $('html').attr('data-wf-page', webflowPageId);
   window.Webflow && window.Webflow.destroy();
