@@ -120,19 +120,8 @@ function reloadJS() {
             },
         }).mount();
     if (window.location.pathname !== '/') {
-        const splideElement = document.querySelector('.splide');
-        if (splideElement) {
-            splideElement.style.display = 'none';
-
-            // Console log when the Splide slider is destroyed
-            console.log('Splide slider cleared!');
-        }
         destroyGui();
     } else {
-        const splideElement = document.querySelector('.splide');
-        if (splideElement) {
-        splideElement.style.display = 'block'; // Show the Splide slider
-        }
         createGui();
     }
 }
