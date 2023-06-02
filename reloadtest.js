@@ -185,9 +185,14 @@ barba.hooks.after((data) => {
     reloadJS();
 
     if (window.location.pathname === '/') {
-      if (!guiInitialized) {
-        createGui();
-        guiInitialized = true;
+      if (data.next && data.next.namespace === 'home') {
+        if (!guiInitialized) {
+          createGui();
+          guiInitialized = true;
+        }
+      } else {
+        destroyGui();
+        guiInitialized = false;
       }
     } else {
       destroyGui();
