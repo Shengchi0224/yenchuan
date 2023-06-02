@@ -83,7 +83,6 @@ function reloadJS() {
     resetWebflow();
     reloadGSAP();
     animateElements();
-    animateElements();
     if (window.location.pathname !== '/') {
         const splideElement = document.querySelector('.splide');
         if (splideElement && splideElement.splide) {
@@ -145,7 +144,6 @@ function reloadJS() {
 function initial() {
     resetWebflow();
     reloadGSAP();
-    animateElements();
     animateElements();
     if (window.location.pathname !== '/') {
         const splideElement = document.querySelector('.splide');
