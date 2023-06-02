@@ -95,7 +95,8 @@ function reloadJS() {
     } else {
         const splideElement = document.querySelector('.splide');
         if (splideElement) {
-        splideElement.style.display = 'block'; // Show the Splide slider}
+        splideElement.style.display = 'block'; // Show the Splide slider
+        }
         createGui();
     }
 }
