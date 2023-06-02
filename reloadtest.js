@@ -120,6 +120,11 @@ function reloadJS() {
       },
     },
   }).mount();
+  if (window.location.pathname === '/') {
+    createGui();
+  } else {
+    destroyGui();
+  }
 }
 
 // Call the necessary functions when the page is loaded
