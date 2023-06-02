@@ -196,10 +196,13 @@ barba.hooks.after((data) => {
     // Navigating back to the home page
     console.log('Navigating back to the home page');
     setTimeout(() => {
+      console.log('Setting up the initial page');
       initial();
-      createGui();
-      guiInitialized = true;
-      console.log('Initial function called and GUI created');
+      if (!guiInitialized) {
+        createGui();
+        guiInitialized = true;
+        console.log('GUI created');
+      }
     }, 0);
   } else {
     // Navigating to a new page or leaving the home page
