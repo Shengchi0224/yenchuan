@@ -135,50 +135,57 @@ function reloadJS() {
 
 // Call the necessary functions when the page is loaded
 function initial() {
-  animateElements();
-  reloadGSAP();
   resetWebflow();
-  new Splide('.splide', {
-    perPage: 4,
-    perMove: 1,
-    focus: 0,
-    type: 'loop',
-    gap: '2.66%',
-    arrows: 'slider',
-    pagination: 'slider',
-    speed: 600,
-    dragAngleThreshold: 30,
-    autoWidth: false,
-    rewind: false,
-    rewindSpeed: 400,
-    waitForTransition: false,
-    updateOnMove: true,
-    trimSpace: false,
-    breakpoints: {
-      991: {
-        // Tablet
-        perPage: 2,
-        gap: '3vw',
-      },
-      767: {
-        // Mobile Landscape
-        perPage: 1,
-        gap: '2.5vw',
-        autoWidth: true, // for cards with differing widths
-      },
-      479: {
-        // Mobile Portrait
-        perPage: 1,
-        gap: '2.5vw',
-        autoWidth: true, // for cards with differing widths
-      },
-    },
-  }).mount();
-  if (window.location.pathname === '/') {
-    createGui();
-  } else {
-    destroyGui();
-  }
+  reloadGSAP();
+  animateElements();
+    if (window.location.pathname !== '/') {
+        // Code to stop the animation goes here
+        // For example, you can use GSAP methods to pause or reset the animation
+        // Example: gsap.timeline().pause();
+        // Example: gsap.timeline().kill();
+
+        // Destroy the GUI if it was created on the home page
+        destroyGui();
+    } else {
+        // Add any additional JavaScript files or functions to reload here
+        new Splide('.splide', {
+            perPage: 4,
+            perMove: 1,
+            focus: 0,
+            type: 'loop',
+            gap: '2.66%',
+            arrows: 'slider',
+            pagination: 'slider',
+            speed: 600,
+            dragAngleThreshold: 30,
+            autoWidth: false,
+            rewind: false,
+            rewindSpeed: 400,
+            waitForTransition: false,
+            updateOnMove: true,
+            trimSpace: false,
+            breakpoints: {
+                991: {
+                    // Tablet
+                    perPage: 2,
+                    gap: '3vw',
+                },
+                767: {
+                    // Mobile Landscape
+                    perPage: 1,
+                    gap: '2.5vw',
+                    autoWidth: true, // for cards with differing widths
+                },
+                479: {
+                    // Mobile Portrait
+                    perPage: 1,
+                    gap: '2.5vw',
+                    autoWidth: true, // for cards with differing widths
+                },
+            },
+        }).mount();
+        createGui();
+    }
 }
 
 // Call the initial function when the page is loaded
