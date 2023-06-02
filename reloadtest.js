@@ -180,16 +180,44 @@ barba.hooks.after((data) => {
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
 
-  if (data.current.namespace === 'home') {
-    // Page transition occurred and current page is home
+  console.log('barba.hooks.after');
+  console.log('Current:', data.current);
+  console.log('Next:', data.next);
+
+  if (data.current) {
+    // Page transition occurred
+    console.log('Page transition occurred');
     reloadJS();
-    if (!guiInitialized) {
-      createGui();
-      guiInitialized = true;
+
+    if (window.location.pathname === '/') {
+      console.log('Current page is home');
+      if (!guiInitialized) {
+        createGui();
+        guiInitialized = true;
+        console.log('GUI created');
+      }
+    } else {
+      console.log('Leaving home page');
+      destroyGui();
+      guiInitialized = false;
+      console.log('GUI destroyed');
     }
   } else {
-    // Navigating to a new page or leaving the home page
-    destroyGui();
-    guiInitialized = false;
+    // Navigating to a new page
+    console.log('Navigating to a new page');
+    initial();
+    if (window.location.pathname === '/') {
+      console.log('Current page is home');
+      if (!guiInitialized) {
+        createGui();
+        guiInitialized = true;
+        console.log('GUI created');
+      }
+    } else {
+      console.log('Leaving home page');
+      destroyGui();
+      guiInitialized = false;
+      console.log('GUI destroyed');
+    }
   }
 });
