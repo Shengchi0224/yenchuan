@@ -101,7 +101,7 @@ function reloadJS() {
                 },
             },
         }).mount();
-       reloadvids();
+       replayVideo();
     }
 
     // Call the necessary functions when the page is loaded
