@@ -60,25 +60,6 @@ function animateElements() {
   );
 }
 
-let gui = null;
-
-function createGui() {
-  if (!gui) {
-    gui = new dat.GUI();
-    reloadgui();
-  }
-}
-
-function destroyGui() {
-  // Destroy the dat.gui instance
-  console.log('Destroying GUI');
-  if (gui) {
-    gui.destroy();
-    gui = null;
-    console.log('GUI destroyed');
-  }
-}
-
 function reloadJS() {
   resetWebflow();
   reloadGSAP();
@@ -129,8 +110,6 @@ function reloadJS() {
                 },
             },
         }).mount();
-        setTimeout(() => { createGui(); }, 1000);
-    }
 }
 
 // Call the necessary functions when the page is loaded
@@ -174,11 +153,6 @@ function initial() {
       },
     },
   }).mount();
-  if (window.location.pathname === '/') {
-    setTimeout(() => { createGui(); }, 1000);
-  } else {
-    destroyGui();
-  }
 }
 
 // Call the initial function when the page is loaded
