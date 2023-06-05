@@ -56,7 +56,15 @@ function animateElements() {
         }
     );
 }
-
+function reloadvids() {
+   const video = document.getElementById("bgvid");
+    
+    video.addEventListener("ended", function() {
+  // Replay the video
+  video.currentTime = 0; // Reset the current time to the beginning
+  video.play(); // Start playing the video
+});
+}
 function reloadJS() {
     resetWebflow();
     reloadGSAP();
@@ -97,6 +105,7 @@ function reloadJS() {
                 },
             },
         }).mount();
+       reloadvids();
     }
 
     // Call the necessary functions when the page is loaded
