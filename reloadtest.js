@@ -101,7 +101,7 @@ function reloadJS() {
                 },
             },
         }).mount();
-       replayVideo();
+       
     }
 
     // Call the necessary functions when the page is loaded
@@ -165,9 +165,11 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
+            replayVideo();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
+            replayVideo();
         }
     });
