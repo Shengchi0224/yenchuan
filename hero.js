@@ -209,36 +209,6 @@ function resize() {
 	setup();
 }
 window.onresize = resize;
-
-can.ontouchmove = function(e){
-    for (var i = 0; i < settings.circles; ++i) {
-        function timeout(i) {
-            setTimeout(function () {
-                if (i < window.arr.length)
-                    window.arr[i].target = {
-                        x: e.clientX,
-                        y: e.clientY
-                    }
-            }, i * settings.delay);
-        }
-        timeout(i);
-    }
-}
-
-can.onmousemove = function (e) {
-    for (var i = 0; i < settings.circles; ++i) {
-        function timeout(i) {
-            setTimeout(function () {
-                if (i < window.arr.length)
-                    window.arr[i].target = {
-                        x: e.clientX,
-                        y: e.clientY
-                    }
-            }, i * settings.delay);
-        }
-        timeout(i);
-    }
-};
 resize();
 requestAnimationFrame(draw);
 setTimeout(function(){
