@@ -56,14 +56,10 @@ function animateElements() {
         }
     );
 }
-function reloadvids() {
-   const video = document.getElementById("bgvid");
-    
-    video.addEventListener("ended", function() {
-  // Replay the video
+function replayVideo() {
+  const video = document.getElementById("myVideo");
   video.currentTime = 0; // Reset the current time to the beginning
   video.play(); // Start playing the video
-});
 }
 function reloadJS() {
     resetWebflow();
