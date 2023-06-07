@@ -13,12 +13,12 @@ function leaveAnimation() {
   tl.fromTo(".loading-screen", {
     opacity: 1,
     borderRadius: '0px',
-    height: "0vh",
+    height: "100vh",
+    marginTop: "100vh",
     backgroundColor: "#522c18",
   },
   {
     duration: 1,
-    height: "100vh",
     ease: "Power2.out",
     marginTop: "0vh",
   });
@@ -29,13 +29,11 @@ function enterAnimation() {
   tl.fromTo(
     ".loading-screen",
     {
-      height: "100vh",
       marginTop: "0vh",
     },
     {
       borderRadius: '40px',
       duration: 1,
-      height: "30vh",
       marginTop: "70vh",
       ease: "Power2.out",
       backgroundColor: "white",
