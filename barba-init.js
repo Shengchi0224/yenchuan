@@ -18,8 +18,8 @@ function leaveAnimation() {
     backgroundColor: "#522c18",
   },
   {
-    duration: 1.5,
-    ease: "Power2.out",
+    duration: 1,
+    ease: "expo.out",
     marginTop: "0vh",
   });
 }
