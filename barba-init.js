@@ -18,7 +18,7 @@ function leaveAnimation() {
     backgroundColor: "#522c18",
   },
   {
-    duration: 1,
+    duration: 1.5,
     ease: "Power2.out",
     marginTop: "0vh",
   });
@@ -33,7 +33,7 @@ function enterAnimation() {
     },
     {
       borderRadius: '40px',
-      duration: 1,
+      duration: 2,
       marginTop: "70vh",
       ease: "Power2.out",
       backgroundColor: "white",
