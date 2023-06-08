@@ -56,8 +56,9 @@ function animateElements() {
         }
     );
 }
+const vid_ids = ['myVideo', 'myVideo-1'];
 function replayVideo() {
-  const video = document.getElementById("myVideo");
+  const video = document.getElementById(vid_ids);
   video.currentTime = 0; // Reset the current time to the beginning
   video.play(); // Start playing the video
 }
