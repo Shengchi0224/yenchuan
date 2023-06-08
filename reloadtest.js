@@ -56,9 +56,8 @@ function animateElements() {
         }
     );
 }
-const vid_ids = ['myVideo', 'myVideo-1'];
-function replayVideo() {
-  const video = document.getElementById(vid_ids);
+function replayVideo(videoId) {
+  const video = document.getElementById(videoId);
   video.currentTime = 0; // Reset the current time to the beginning
   video.play(); // Start playing the video
 }
@@ -166,11 +165,13 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            replayVideo();
+            replayVideo("#myVideo");
+            replayVideo("#myVideo-1");
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
-            replayVideo();
+            replayVideo("#myVideo");
+            replayVideo("#myVideo-1");
         }
     });
