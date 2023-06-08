@@ -1,4 +1,4 @@
-function resetWebflow(data) {
+function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
   const parser = new DOMParser();
@@ -66,7 +66,7 @@ function replayVideos() {
   });
 }
 function reloadJS() {
-    resetWebflow(data);
+    resetWebflow();
     reloadGSAP();
     animateElements();
     new Splide('.splide', {
@@ -112,7 +112,7 @@ function reloadJS() {
     function initial() {
         animateElements();
         reloadGSAP();
-        resetWebflow(data);
+        resetWebflow();
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
