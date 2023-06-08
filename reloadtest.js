@@ -56,10 +56,12 @@ function animateElements() {
         }
     );
 }
-function replayVideo(videoId) {
-  const video = document.getElementById(videoId);
-  video.currentTime = 0; // Reset the current time to the beginning
-  video.play(); // Start playing the video
+function replayVideos() {
+  const videos = document.querySelectorAll("#myVideo, #myVideo-1");
+  videos.forEach((video) => {
+    video.currentTime = 0; // Reset the current time to the beginning
+    video.play(); // Start playing the video
+  });
 }
 function reloadJS() {
     resetWebflow();
@@ -165,13 +167,11 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            replayVideo("#myVideo");
-            replayVideo("#myVideo-1");
+            replayVideos();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
-            replayVideo("#myVideo");
-            replayVideo("#myVideo-1");
+            replayVideos();
         }
     });
