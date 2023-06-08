@@ -1,13 +1,15 @@
 function resetWebflow() {
-    // Reset Webflow functionality
-    let webflowPageId = $('html').attr('data-wf-page');
-    const parser = new DOMParser();
-    const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
-    webflowPageId = $(dom).find('body').text();
-    $('html').attr('data-wf-page', webflowPageId);
-    window.Webflow && window.Webflow.destroy();
-    window.Webflow && window.Webflow.ready();
-    window.Webflow && window.Webflow.require('ix2').init();
+  // Reset Webflow functionality
+  let webflowPageId = $('html').attr('data-wf-page');
+  const parser = new DOMParser();
+  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
+  webflowPageId = $(dom).find('body').text();
+  $('html').attr('data-wf-page', webflowPageId);
+  console.log('Document reloaded');
+  
+  window.Webflow && window.Webflow.destroy();
+  window.Webflow && window.Webflow.ready();
+  window.Webflow && window.Webflow.require('ix2').init();
 }
 
 function reloadGSAP() {
