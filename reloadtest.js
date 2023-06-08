@@ -59,7 +59,7 @@ function animateElements() {
     );
 }
 function replayVideos() {
-  const videos = document.querySelectorAll("#myVideo, #myVideo-1","#hero-bgvids");
+  const videos = document.querySelectorAll("#myVideo, #myVideo-1","#hero-bgvids","#hero-bgvids-1");
   videos.forEach((video) => {
     video.currentTime = 0; // Reset the current time to the beginning
     video.play(); // Start playing the video
