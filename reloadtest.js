@@ -139,6 +139,7 @@ function reloadJS() {
     function initial() {
         animateElements();
         reloadGSAP();
+        reloadFinsweet();
         resetWebflow();
         new Splide('.splide', {
             perPage: 4,
