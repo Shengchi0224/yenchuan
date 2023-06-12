@@ -31,6 +31,32 @@ function reloadGSAP() {
     }
 }
 
+function reloadFinsweet() {
+  // Reload Finsweet attribute sort library
+  const cmssortScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmssort@1/cmssort.js"]');
+  const newCmssortScript = document.createElement('script');
+  newCmssortScript.src = 'https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmssort@1/cmssort.js';
+
+  if (cmssortScript) {
+    cmssortScript.parentNode.replaceChild(newCmssortScript, cmssortScript);
+  } else {
+    // If the existing script tag is not found, append the new script to the document head
+    document.head.appendChild(newCmssortScript);
+  }
+
+  // Reload Finsweet attribute filter library
+  const cmsfilterScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js"]');
+  const newCmsfilterScript = document.createElement('script');
+  newCmsfilterScript.src = 'https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js';
+
+  if (cmsfilterScript) {
+    cmsfilterScript.parentNode.replaceChild(newCmsfilterScript, cmsfilterScript);
+  } else {
+    // If the existing script tag is not found, append the new script to the document head
+    document.head.appendChild(newCmsfilterScript);
+  }
+}
+
 function animateElements() {
     // Animate elements using GSAP
     const textrev = gsap.timeline();
@@ -68,6 +94,7 @@ function replayVideos() {
 function reloadJS() {
     resetWebflow();
     reloadGSAP();
+    reloadFinsweet();
     animateElements();
     new Splide('.splide', {
             perPage: 4,
