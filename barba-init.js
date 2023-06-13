@@ -12,7 +12,7 @@ function leaveAnimation() {
       opacity: 1,
       borderRadius: "0px",
       backgroundColor: "#522c18",
-      y: '100%'
+      y: '100%',
     },
     {
       duration: 1,
@@ -31,7 +31,7 @@ function enterAnimation() {
     {
       borderRadius: "40px",
       duration: 1,
-      y: '70%'
+      y: '70%',
       ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
