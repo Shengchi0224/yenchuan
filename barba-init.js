@@ -9,6 +9,7 @@ function leaveAnimation() {
   gsap.fromTo(
     ".loading-screen",
     {
+      display:"block",
       opacity: 1,
       borderRadius: "0px",
       backgroundColor: "#522c18",
