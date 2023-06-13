@@ -91,9 +91,11 @@ barba.init({
         await delay(1000);
       },
       async after(data) {
+        $(data.next.container).addClass("fixed");
         enterAnimation1();
       },
       async once(data) {
+        $(data.next.container).addClass("fixed");
         enterAnimation1();
       },
     },
