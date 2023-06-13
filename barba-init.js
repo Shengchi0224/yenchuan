@@ -81,6 +81,7 @@ barba.init({
       },
     },
     {
+      preventRunning: true,
       name: "Animationhome",
       to: {
         namespace: ["full"],
