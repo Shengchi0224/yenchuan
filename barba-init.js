@@ -47,14 +47,11 @@ function enterAnimation1() {
   gsap.fromTo(
     ".loading-screen",
     {
-      height: "100vh",
-      marginTop: "0vh",
+      y: 0,
     },
     {
-      borderRadius: "40px",
       duration: 1,
-      height: "30vh",
-      marginTop: "70vh",
+      y: '100%',
       ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
@@ -81,6 +78,22 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
+      },
+    },
+    {
+      name: "Animationhome",
+      to: {
+        namespace: ["home"],
+      },
+      async leave(data) {
+        leaveAnimation();
+        await delay(1000);
+      },
+      async after(data) {
+        enterAnimation1();
+      },
+      async once(data) {
+        enterAnimation1();
       },
     },
   ],
