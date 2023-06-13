@@ -13,12 +13,12 @@ function leaveAnimation() {
       opacity: 1,
       borderRadius: "0px",
       backgroundColor: "#522c18",
-      y: '100%',
+      y: "100vh",
     },
     {
       duration: 1,
       ease: "power2.out",
-      y: 0,
+      y: "0vh",
     }
   );
 }
@@ -27,12 +27,12 @@ function enterAnimation() {
   gsap.fromTo(
     ".loading-screen",
     {
-      y: 0,
+      y: "0vh",
     },
     {
       borderRadius: "40px",
       duration: 1.5,
-      y: '70%',
+      y: "70vh",
       ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
@@ -49,7 +49,7 @@ function enterAnimation1() {
   gsap.fromTo(
     ".loading-screen",
     {
-      y: 0,
+      y: "0vh",
     },
     {
       duration: 1.5,
