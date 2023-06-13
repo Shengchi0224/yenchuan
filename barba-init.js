@@ -45,6 +45,26 @@ function enterAnimation() {
     }
   );
 }
+function enterAnimation1() {
+  const tl = gsap.timeline();
+  tl.fromTo(
+    ".loading-screen",
+    {
+      marginTop: "0vh",
+    },
+    {
+      duration: 2,
+      marginTop: "100vh",
+      ease: "Power2.out",
+      backgroundColor: "white",
+      onComplete: () => {
+        tl.to(".loading-screen", {
+          opacity: 0,
+        });
+      },
+    }
+  );
+}
 barba.use(barbaPrefetch);
 barba.init({
   transitions: [
@@ -60,6 +80,23 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
+      }
+    },
+    ,
+    {
+      name: "Animationhome",
+      to: {
+        namespace: ["home"]
+      },
+      async leave(data) {
+        leaveAnimation();
+        await delay(1000);
+      },
+      async after(data) {
+        enterAnimation1();
+      },
+      async once(data) {
+        enterAnimation1();
       }
     },
   ],
