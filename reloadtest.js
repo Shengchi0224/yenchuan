@@ -202,7 +202,6 @@ function reloadJS() {
         } else {
             // Initial page load
             console.log('Initial page load');
-            $(data.next.container).removeClass("fixed");
             initial();
             replayVideos();
         }
