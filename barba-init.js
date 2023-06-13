@@ -37,7 +37,7 @@ function enterAnimation() {
       onComplete: () => {
         gsap.to(".loading-screen", {
           opacity: 0,
-          display:none,
+          display:"none",
         });
       },
     }
@@ -58,7 +58,7 @@ function enterAnimation1() {
       onComplete: () => {
         gsap.to(".loading-screen", {
           opacity: 0,
-          display:none,
+          display:"none",
         });
       },
     }
