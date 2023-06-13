@@ -30,7 +30,7 @@ function enterAnimation() {
     },
     {
       borderRadius: "40px",
-      duration: 1,
+      duration: 1.5,
       y: '70%',
       ease: "power2.out",
       backgroundColor: "white",
@@ -50,7 +50,7 @@ function enterAnimation1() {
       y: 0,
     },
     {
-      duration: 1,
+      duration: 1.5,
       y: '100%',
       ease: "power2.out",
       backgroundColor: "white",
