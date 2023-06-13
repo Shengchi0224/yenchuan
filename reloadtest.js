@@ -196,11 +196,13 @@ function reloadJS() {
         if (data.current) {
             // Page transition occurred
             console.log('Page transition occurred');
+            $(data.next.container).removeClass("fixed");
             reloadJS();
             replayVideos();
         } else {
             // Initial page load
             console.log('Initial page load');
+            $(data.next.container).removeClass("fixed");
             initial();
             replayVideos();
         }
