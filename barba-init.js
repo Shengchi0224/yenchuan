@@ -75,7 +75,6 @@ barba.init({
       },
       async after(data) {
         enterAnimation();
-        $(data.next.container).addClass("fixed");
       },
       async once(data) {
         enterAnimation();
@@ -92,7 +91,6 @@ barba.init({
         await delay(1000);
       },
       async after(data) {
-        $(data.next.container).addClass("fixed");
         enterAnimation1();
       },
       async once(data) {
