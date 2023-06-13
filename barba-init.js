@@ -83,7 +83,7 @@ barba.init({
     {
       name: "Animationhome",
       to: {
-        namespace: ["home"],
+        namespace: ["full"],
       },
       async leave(data) {
         leaveAnimation();
