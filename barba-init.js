@@ -1,43 +1,41 @@
-function delay(time) {
-  time = time || 2000;
-  return new Promise((done) => {
-    setTimeout(() => {
-      done();
-    }, time);
+function delay(time = 2000) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
   });
 }
 
 function leaveAnimation() {
   console.log("leave");
-  const tl = gsap.timeline();
-  tl.fromTo(".loading-screen", {
-    opacity: 1,
-    borderRadius: '0px',
-    backgroundColor: "#522c18",
-    y:"-100vh",
-  },
-  {
-    duration: 1,
-    ease: "Power2.out",
-    y:"0vh",
-  });
+  gsap.fromTo(
+    ".loading-screen",
+    {
+      opacity: 1,
+      borderRadius: "0px",
+      backgroundColor: "#522c18",
+      y: "-100vh",
+    },
+    {
+      duration: 1,
+      ease: "power2.out",
+      y: "0vh",
+    }
+  );
 }
 
 function enterAnimation() {
-  const tl = gsap.timeline();
-  tl.fromTo(
+  gsap.fromTo(
     ".loading-screen",
     {
-     y:"0vh",
+      y: "0vh",
     },
     {
-      borderRadius: '40px',
+      borderRadius: "40px",
       duration: 1,
-      y:"-70vh",
-      ease: "Power2.out",
+      y: "-70vh",
+      ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
-        tl.to(".loading-screen", {
+        gsap.to(".loading-screen", {
           opacity: 0,
         });
       },
@@ -46,22 +44,21 @@ function enterAnimation() {
 }
 
 function enterAnimation1() {
-  const tl = gsap.timeline();
-  tl.fromTo(
+  gsap.fromTo(
     ".loading-screen",
     {
       height: "100vh",
       marginTop: "0vh",
     },
     {
-      borderRadius: '40px',
+      borderRadius: "40px",
       duration: 1,
       height: "30vh",
       marginTop: "70vh",
-      ease: "Power2.out",
+      ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
-        tl.to(".loading-screen", {
+        gsap.to(".loading-screen", {
           opacity: 0,
         });
       },
@@ -74,7 +71,7 @@ barba.init({
   transitions: [
     {
       preventRunning: true,
-      name: 'opacity-transition',
+      name: "opacity-transition",
       async leave(data) {
         leaveAnimation();
         await delay(1000);
@@ -84,7 +81,7 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
-      }
+      },
     },
   ],
 });
