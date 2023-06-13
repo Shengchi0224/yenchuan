@@ -1,26 +1,27 @@
-function delay(time = 2000) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
+function delay(time) {
+  time = time || 2000;
+  return new Promise((done) => {
+    setTimeout(() => {
+      done();
+    }, time);
   });
 }
 
 function leaveAnimation() {
+  console.log("leave");
   const tl = gsap.timeline();
-  tl.fromTo(
-    ".loading-screen",
-    {
-      opacity: 1,
-      borderRadius: "0px",
-      height: "100vh",
-      marginTop: "100vh",
-      backgroundColor: "#522c18",
-    },
-    {
-      duration: 1,
-      ease: "expo.out",
-      marginTop: "0vh",
-    }
-  );
+  tl.fromTo(".loading-screen", {
+    opacity: 1,
+    borderRadius: '0px',
+    height: "100vh",
+    backgroundColor: "#522c18",
+    y:-100,
+  },
+  {
+    duration: 1,
+    ease: "Power2.out",
+    y:0,
+  });
 }
 
 function enterAnimation() {
@@ -28,12 +29,12 @@ function enterAnimation() {
   tl.fromTo(
     ".loading-screen",
     {
-      marginTop: "0vh",
+      y:0,
     },
     {
-      borderRadius: "40px",
-      duration: 2,
-      marginTop: "70vh",
+      borderRadius: '40px',
+      duration: 1,
+      y:-70,
       ease: "Power2.out",
       backgroundColor: "white",
       onComplete: () => {
@@ -50,11 +51,14 @@ function enterAnimation1() {
   tl.fromTo(
     ".loading-screen",
     {
+      height: "100vh",
       marginTop: "0vh",
     },
     {
-      duration: 2,
-      marginTop: "100vh",
+      borderRadius: '40px',
+      duration: 1,
+      height: "30vh",
+      marginTop: "70vh",
       ease: "Power2.out",
       backgroundColor: "white",
       onComplete: () => {
@@ -71,7 +75,7 @@ barba.init({
   transitions: [
     {
       preventRunning: true,
-      name: "opacity-transition",
+      name: 'opacity-transition',
       async leave(data) {
         leaveAnimation();
         await delay(1000);
@@ -81,23 +85,7 @@ barba.init({
       },
       async once(data) {
         enterAnimation();
-      },
-    },
-    {
-      name: "Animationhome",
-      to: {
-        namespace: ["home"],
-      },
-      async leave(data) {
-        leaveAnimation();
-        await delay(1000);
-      },
-      async after(data) {
-        enterAnimation1();
-      },
-      async once(data) {
-        enterAnimation1();
-      },
+      }
     },
   ],
 });
