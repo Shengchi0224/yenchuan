@@ -30,7 +30,7 @@ function enterAnimation() {
       y: '0%',
     },
     {
-      borderRadius: "40px",
+      borderRadius: "20px",
       duration: 1.5,
       y: '70%',
       ease: "power2.out",
