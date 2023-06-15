@@ -12,6 +12,21 @@ function resetWebflow() {
   window.Webflow && window.Webflow.require('ix2').init();
 }
 
+const options = {
+  frameRate: 150,
+  animationTime: 1000,
+  stepSize: 100,
+  pulseAlgorithm: 1,
+  pulseScale: 4,
+  pulseNormalize: 1,
+  accelerationDelta: 50,
+  accelerationMax: 3,
+  keyboardSupport: 1,
+  arrowScroll: 50,
+  fixedBackground: 0
+};
+
+
 function reloadGSAP() {
     // Reload GSAP library
     const gsapScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"]');
@@ -96,6 +111,7 @@ function reloadJS() {
     reloadGSAP();
     reloadFinsweet();
     animateElements();
+    smoothScroll(options);
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -141,6 +157,7 @@ function reloadJS() {
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
+        smoothScroll(options);
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
