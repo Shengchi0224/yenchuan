@@ -12,21 +12,6 @@ function resetWebflow() {
   window.Webflow && window.Webflow.require('ix2').init();
 }
 
-const options = {
-  frameRate: 150,
-  animationTime: 1000,
-  stepSize: 100,
-  pulseAlgorithm: 1,
-  pulseScale: 4,
-  pulseNormalize: 1,
-  accelerationDelta: 50,
-  accelerationMax: 3,
-  keyboardSupport: 1,
-  arrowScroll: 50,
-  fixedBackground: 0
-};
-
-
 function reloadGSAP() {
     // Reload GSAP library
     const gsapScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"]');
@@ -72,21 +57,6 @@ function reloadFinsweet() {
   }
 }
 
-// Function to initialize Spline animation
-function initializeSplineAnimation() {
-  var splineViewer = document.querySelector('spline-viewer');
-
-  if (splineViewer) {
-    var url = splineViewer.getAttribute('url');
-    // Create a new <script> element and set its src attribute to the Spline URL
-    var script = document.createElement('script');
-    script.src = url;
-
-    // Append the script to the <head> element
-    document.head.appendChild(script);
-  }
-}
-
 function animateElements() {
     // Animate elements using GSAP
     const textrev = gsap.timeline();
@@ -115,7 +85,7 @@ function animateElements() {
     );
 }
 function replayVideos() {
-  const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
+  const videos = document.querySelectorAll("#myVideo-1, #hero-bgvids, #hero-bgvids-1");
   videos.forEach((video) => {
     video.currentTime = 0; // Reset the current time to the beginning
     video.play(); // Start playing the video
@@ -126,7 +96,6 @@ function reloadJS() {
     reloadGSAP();
     reloadFinsweet();
     animateElements();
-    smoothScroll(options);
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -172,7 +141,6 @@ function reloadJS() {
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
-        smoothScroll(options);
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -235,6 +203,5 @@ function reloadJS() {
             console.log('Initial page load');
             initial();
             replayVideos();
-            initializeSplineAnimation();
         }
     });
