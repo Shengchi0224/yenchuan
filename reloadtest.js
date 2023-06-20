@@ -1,4 +1,4 @@
-function resetWebflow() {
+function resetWebflow(data) {
   let parser = new DOMParser();
   let dom = parser.parseFromString(data.next.html, "text/html");
   let webflowPageId = $(dom).find("html").attr("data-wf-page");
@@ -102,7 +102,7 @@ function replayVideos() {
 }
 
 function reloadJS() {
-    resetWebflow();
+    resetWebflow(data);
     reloadGSAP();
     reloadFinsweet();
     animateElements();
@@ -150,7 +150,7 @@ function reloadJS() {
         animateElements();
         reloadGSAP();
         reloadFinsweet();
-        resetWebflow();
+        resetWebflow(data);
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
