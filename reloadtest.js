@@ -11,15 +11,20 @@ function resetWebflow() {
   if (window.Webflow) {
     window.Webflow.destroy();
     window.Webflow.ready();
-    setTimeout(checkInteractionsInitialized, 1000);
+    window.Webflow.require('ix2').init();
   }
 
-  function checkInteractionsInitialized() {
-    if (window.Webflow && window.Webflow.require('ix2') && window.Webflow.require('ix2').init) {
-      console.log('Interactions 2.0 (ix2) is initialized');
-    } else {
-      console.log('Interactions 2.0 (ix2) is not initialized');
-    }
+  // Reset Interactions 2.0 (ix2) animations
+  if (window.Webflow && window.Webflow.require('ix2').reset) {
+    window.Webflow.require('ix2').reset();
+    console.log('Interactions 2.0 (ix2) animations reset');
+  }
+
+  // Check if Interactions 2.0 (ix2) is initialized
+  if (window.Webflow && window.Webflow.require('ix2').ready) {
+    console.log('Interactions 2.0 (ix2) is initialized');
+  } else {
+    console.log('Interactions 2.0 (ix2) is not initialized');
   }
 }
 
