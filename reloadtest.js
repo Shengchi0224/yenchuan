@@ -7,9 +7,12 @@ function resetWebflow() {
   $('html').attr('data-wf-page', webflowPageId);
   console.log('Document reloaded');
 
-  window.Webflow && window.Webflow.destroy();
-  window.Webflow && window.Webflow.ready();
-  window.Webflow && window.Webflow.require('ix2').init();
+  // Reinitialize Webflow
+  if (window.Webflow) {
+    window.Webflow.destroy();
+    window.Webflow.ready();
+    window.Webflow.require('ix2').init();
+  }
 
   // Check if Interactions 2.0 (ix2) is initialized
   if (window.Webflow && window.Webflow.require('ix2').ready) {
