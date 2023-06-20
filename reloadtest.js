@@ -229,11 +229,12 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            initializeSplineAnimation();
+            replayVideos();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
+            replayVideos();
             initializeSplineAnimation();
         }
     });
