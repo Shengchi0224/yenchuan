@@ -72,6 +72,21 @@ function reloadFinsweet() {
   }
 }
 
+// Function to initialize Spline animation
+function initializeSplineAnimation() {
+  var splineViewer = document.querySelector('spline-viewer');
+
+  if (splineViewer) {
+    var url = splineViewer.getAttribute('url');
+    // Create a new <script> element and set its src attribute to the Spline URL
+    var script = document.createElement('script');
+    script.src = url;
+
+    // Append the script to the <head> element
+    document.head.appendChild(script);
+  }
+}
+
 function animateElements() {
     // Animate elements using GSAP
     const textrev = gsap.timeline();
@@ -214,11 +229,10 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            replayVideos();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
-            replayVideos();
+            initializeSplineAnimation();
         }
     });
