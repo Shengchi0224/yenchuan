@@ -1,18 +1,11 @@
 function resetWebflow() {
-  // Reset Webflow functionality
-  let webflowPageId = $('html').attr('data-wf-page');
-  const parser = new DOMParser();
-  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
-  webflowPageId = $(dom).find('body').text();
-  $('html').attr('data-wf-page', webflowPageId);
-  console.log('Document reloaded');
-
-  // Reinitialize Webflow
-  if (window.Webflow) {
-    window.Webflow.destroy();
-    window.Webflow.ready();
-    window.Webflow.require('ix2').init();
-  }
+  let parser = new DOMParser();
+  let dom = parser.parseFromString(data.next.html, "text/html");
+  let webflowPageId = $(dom).find("html").attr("data-wf-page");
+  $("html").attr("data-wf-page", webflowPageId);
+  window.Webflow && window.Webflow.destroy();
+  window.Webflow && window.Webflow.ready();
+  window.Webflow && window.Webflow.require("ix2").init();
 
   // Check if Interactions 2.0 (ix2) is initialized
   if (window.Webflow && window.Webflow.require('ix2').ready) {
