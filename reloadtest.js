@@ -102,7 +102,9 @@ function animateElements() {
 }
 
 function replayVideos() {
+  console.log("replayVideos() called"); // Debugging statement
   const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
+  console.log("Number of videos:", videos.length); // Debugging statement
   videos.forEach((video) => {
     video.currentTime = 0; // Reset the current time to the beginning
     video.play(); // Start playing the video
