@@ -109,8 +109,8 @@ function replayVideos() {
   });
 
   // Replay Webflow videos
-  if (typeof Webflow !== "undefined" && typeof Webflow.ready === "function") {
-    Webflow.ready();
+  if (typeof Webflow !== "undefined" && typeof Webflow.require === "function") {
+    Webflow.require('ix2').init();
   }
 }
 
