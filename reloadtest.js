@@ -120,7 +120,6 @@ function reloadJS() {
             focus: 0,
             type: 'loop',
             gap: '2.66%',
-            padding:'5%',
             arrows: 'slider',
             pagination: 'slider',
             speed: 600,
