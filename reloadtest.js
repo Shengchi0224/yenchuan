@@ -109,7 +109,8 @@ function replayVideos() {
   });
 }
 
-function toggleModal() {
+// Function to initialize the modal
+function initModal() {
   const btns = document.querySelectorAll('.tutorial-video_wrap');
   const modals = document.querySelectorAll('.tutorial_wrap');
   const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
@@ -117,7 +118,7 @@ function toggleModal() {
 
   function openModal(index) {
     if (modals[index] && layouts[index]) {
-      modals[index].style.display = 'block';
+      modals[index].style.display = 'flex';
       layouts[index].style.zIndex = '999';
     }
   }
