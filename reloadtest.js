@@ -118,19 +118,11 @@ function toggleModal() {
   function openModal(index) {
     modals[index].style.display = 'flex';
     layouts[index].style.zIndex = '999';
-    setTimeout(function() {
-      modals[index].classList.add('modal-open');
-      layouts[index].classList.add('layout-open');
-    }, 10);
   }
 
   function closeModal(index) {
-    modals[index].classList.remove('modal-open');
-    layouts[index].classList.remove('layout-open');
-    setTimeout(function() {
-      modals[index].style.display = 'none';
-      layouts[index].style.zIndex = '3';
-    }, 300); // Adjust the transition duration (in milliseconds) to match your CSS
+    modals[index].style.display = 'none';
+    layouts[index].style.zIndex = '3';
   }
 
   for (let i = 0; i < btns.length; i++) {
