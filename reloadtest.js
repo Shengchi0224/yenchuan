@@ -117,23 +117,23 @@ function toggleModal() {
 
   function openModal(index) {
     if (modals[index] && layouts[index]) {
-      modals[index].style.display = 'flex';
-      layouts[index].style.zIndex = '999';
+      $(modals[index]).css('display', 'flex');
+      $(layouts[index]).css('z-index', '999');
     }
   }
 
   function closeModal(index) {
     if (modals[index] && layouts[index]) {
-      modals[index].style.display = 'none';
-      layouts[index].style.zIndex = '3';
+      $(modals[index]).css('display', 'none');
+      $(layouts[index]).css('z-index', '3');
     }
   }
 
   for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', function() {
+    $(btns[i]).on('click', function() {
       openModal(i);
     });
-    closeBtns[i].addEventListener('click', function() {
+    $(closeBtns[i]).on('click', function() {
       closeModal(i);
     });
   }
