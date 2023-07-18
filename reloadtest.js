@@ -109,11 +109,35 @@ function replayVideos() {
   });
 }
 
+function toggleModal() {
+  const modal = document.querySelector('.tutorial_wrap');
+  const layout = document.querySelector('.product__flavors__fixed__scroll__layout');
+
+  function openModal() {
+    modal.style.display = 'block';
+    layout.style.zIndex = '999';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    layout.style.zIndex = '3';
+  }
+
+  const btn = document.querySelector('.tutorial-video_wrap');
+  const closeBtn = document.querySelector('.close_btn');
+
+  btn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+}
+
+
 function reloadJS() {
     resetWebflow();
     reloadGSAP();
     reloadFinsweet();
     animateElements();
+    replayVideos();
+    toggleModal();
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -159,6 +183,8 @@ function reloadJS() {
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
+        replayVideos();
+        toggleModal();
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -215,11 +241,9 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            replayVideos();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
-            replayVideos();
         }
     });
