@@ -117,7 +117,7 @@ function toggleModal() {
 
   function openModal(index) {
     if (modals[index] && layouts[index]) {
-      modals[index].style.display = 'block';
+      modals[index].style.display = 'flex';
       layouts[index].style.zIndex = '999';
     }
   }
@@ -138,6 +138,7 @@ function toggleModal() {
     });
   }
 }
+
 
 function reloadJS() {
     resetWebflow();
