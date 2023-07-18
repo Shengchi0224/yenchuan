@@ -146,7 +146,7 @@ function reloadJS() {
     reloadFinsweet();
     animateElements();
     replayVideos();
-    toggleModal();
+    initModal();
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -193,7 +193,7 @@ function reloadJS() {
         reloadFinsweet();
         resetWebflow();
         replayVideos();
-        toggleModal();
+        initModal();
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
