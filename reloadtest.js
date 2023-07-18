@@ -121,8 +121,10 @@ function toggleModal() {
   }
 
   function closeModal(index) {
-    modals[index].style.display = 'none';
-    layouts[index].style.zIndex = '3';
+    if (modals[index] && layouts[index]) {
+      modals[index].style.display = 'none';
+      layouts[index].style.zIndex = '3';
+    }
   }
 
   for (let i = 0; i < btns.length; i++) {
