@@ -114,7 +114,7 @@ function toggleModal() {
   const layout = document.querySelector('.product__flavors__fixed__scroll__layout');
 
   function openModal() {
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     layout.style.zIndex = '999';
   }
 
