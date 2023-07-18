@@ -134,13 +134,15 @@ function toggleModal() {
     }
   }
 
-  parentContainer.addEventListener('click', function(event) {
-    if (event.target.matches('.tutorial-video_wrap')) {
-      openModal(event);
-    } else if (event.target.matches('.close_btn')) {
-      closeModal(event);
-    }
-  });
+  if (parentContainer) {
+    parentContainer.addEventListener('click', function(event) {
+      if (event.target.matches('.tutorial-video_wrap')) {
+        openModal(event);
+      } else if (event.target.matches('.close_btn')) {
+        closeModal(event);
+      }
+    });
+  }
 }
 
 
