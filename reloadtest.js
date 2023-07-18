@@ -146,6 +146,7 @@ function reloadJS() {
     reloadFinsweet();
     animateElements();
     replayVideos();
+    toggleModal();
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -192,6 +193,7 @@ function reloadJS() {
         reloadFinsweet();
         resetWebflow();
         replayVideos();
+        toggleModal();
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -248,11 +250,9 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
-            toggleModal();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
-            toggleModal();
         }
     });
