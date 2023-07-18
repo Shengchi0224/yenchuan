@@ -109,8 +109,7 @@ function replayVideos() {
   });
 }
 
-// Function to initialize the modal
-function initModal() {
+function toggleModal() {
   const btns = document.querySelectorAll('.tutorial-video_wrap');
   const modals = document.querySelectorAll('.tutorial_wrap');
   const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
@@ -118,7 +117,7 @@ function initModal() {
 
   function openModal(index) {
     if (modals[index] && layouts[index]) {
-      modals[index].style.display = 'flex';
+      modals[index].style.display = 'block';
       layouts[index].style.zIndex = '999';
     }
   }
@@ -146,7 +145,6 @@ function reloadJS() {
     reloadFinsweet();
     animateElements();
     replayVideos();
-    initModal();
     new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -193,7 +191,6 @@ function reloadJS() {
         reloadFinsweet();
         resetWebflow();
         replayVideos();
-        initModal();
         new Splide('.splide', {
             perPage: 4,
             perMove: 1,
@@ -250,9 +247,11 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
+            toggleModal();
         } else {
             // Initial page load
             console.log('Initial page load');
             initial();
+            toggleModal();
         }
     });
