@@ -110,24 +110,37 @@ function replayVideos() {
 }
 
 function toggleModal() {
-  const modal = document.querySelector('.tutorial_wrap');
-  const layout = document.querySelector('.product__flavors__fixed__scroll__layout');
+  const btns = document.querySelectorAll('.tutorial-video_wrap');
+  const modals = document.querySelectorAll('.tutorial_wrap');
+  const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
+  const closeBtns = document.querySelectorAll('.close_btn');
 
-  function openModal() {
-    modal.style.display = 'flex';
-    layout.style.zIndex = '999';
+  function openModal(index) {
+    modals[index].style.display = 'flex';
+    layouts[index].style.zIndex = '999';
+    setTimeout(function() {
+      modals[index].classList.add('modal-open');
+      layouts[index].classList.add('layout-open');
+    }, 10);
   }
 
-  function closeModal() {
-    modal.style.display = 'none';
-    layout.style.zIndex = '3';
+  function closeModal(index) {
+    modals[index].classList.remove('modal-open');
+    layouts[index].classList.remove('layout-open');
+    setTimeout(function() {
+      modals[index].style.display = 'none';
+      layouts[index].style.zIndex = '3';
+    }, 300); // Adjust the transition duration (in milliseconds) to match your CSS
   }
 
-  const btn = document.querySelector('.tutorial-video_wrap');
-  const closeBtn = document.querySelector('.close_btn');
-
-  btn.addEventListener('click', openModal);
-  closeBtn.addEventListener('click', closeModal);
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function() {
+      openModal(i);
+    });
+    closeBtns[i].addEventListener('click', function() {
+      closeModal(i);
+    });
+  }
 }
 
 
