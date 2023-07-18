@@ -110,41 +110,40 @@ function replayVideos() {
 }
 
 function toggleModal() {
-  const parentContainer = document.querySelector('.parent-container'); // Replace with the appropriate parent container selector
+  const btns = document.querySelectorAll('.tutorial-video_wrap');
+  const modals = document.querySelectorAll('.tutorial_wrap');
+  const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
+  const closeBtns = document.querySelectorAll('.close_btn');
 
-  function openModal(event) {
-    const btn = event.target.closest('.tutorial-video_wrap');
-    const modal = btn.parentNode.querySelector('.tutorial_wrap');
-    const layout = btn.parentNode.querySelector('.product__flavors__fixed__scroll__layout');
-  
-    if (modal && layout) {
-      modal.style.display = 'flex';
-      layout.style.zIndex = '999';
+  function openModal(index) {
+    console.log('Opening modal:', index);
+    if (modals[index] && layouts[index]) {
+      modals[index].style.display = 'flex';
+      layouts[index].style.zIndex = '999';
+    } else {
+      console.log('Modal or layout element not found:', index);
     }
   }
 
-  function closeModal(event) {
-    const closeBtn = event.target.closest('.close_btn');
-    const modal = closeBtn.parentNode;
-    const layout = modal.previousElementSibling;
-  
-    if (modal && layout) {
-      modal.style.display = 'none';
-      layout.style.zIndex = '3';
+  function closeModal(index) {
+    console.log('Closing modal:', index);
+    if (modals[index] && layouts[index]) {
+      modals[index].style.display = 'none';
+      layouts[index].style.zIndex = '3';
+    } else {
+      console.log('Modal or layout element not found:', index);
     }
   }
 
-  if (parentContainer) {
-    parentContainer.addEventListener('click', function(event) {
-      if (event.target.matches('.tutorial-video_wrap')) {
-        openModal(event);
-      } else if (event.target.matches('.close_btn')) {
-        closeModal(event);
-      }
+  for (let i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function() {
+      openModal(i);
+    });
+    closeBtns[i].addEventListener('click', function() {
+      closeModal(i);
     });
   }
 }
-
 
 
 function reloadJS() {
