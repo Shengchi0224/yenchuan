@@ -110,34 +110,39 @@ function replayVideos() {
 }
 
 function toggleModal() {
-  const btns = document.querySelectorAll('.tutorial-video_wrap');
-  const modals = document.querySelectorAll('.tutorial_wrap');
-  const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
-  const closeBtns = document.querySelectorAll('.close_btn');
-
-  function openModal(index) {
-    if (modals[index] && layouts[index]) {
-      $(modals[index]).css('display', 'flex');
-      $(layouts[index]).css('z-index', '999');
+  const parent = document.querySelector('.parent-container');
+  
+  function openModal(event) {
+    const btn = event.target.closest('.tutorial-video_wrap');
+    const modal = btn.parentNode.querySelector('.tutorial_wrap');
+    const layout = btn.parentNode.querySelector('.product__flavors__fixed__scroll__layout');
+    
+    if (modal && layout) {
+      modal.style.display = 'flex';
+      layout.style.zIndex = '999';
     }
   }
 
-  function closeModal(index) {
-    if (modals[index] && layouts[index]) {
-      $(modals[index]).css('display', 'none');
-      $(layouts[index]).css('z-index', '3');
+  function closeModal(event) {
+    const closeBtn = event.target.closest('.close_btn');
+    const modal = closeBtn.parentNode;
+    const layout = modal.previousElementSibling;
+    
+    if (modal && layout) {
+      modal.style.display = 'none';
+      layout.style.zIndex = '3';
     }
   }
 
-  for (let i = 0; i < btns.length; i++) {
-    $(btns[i]).on('click', function() {
-      openModal(i);
-    });
-    $(closeBtns[i]).on('click', function() {
-      closeModal(i);
-    });
-  }
+  parent.addEventListener('click', function(event) {
+    if (event.target.matches('.tutorial-video_wrap')) {
+      openModal(event);
+    } else if (event.target.matches('.close_btn')) {
+      closeModal(event);
+    }
+  });
 }
+
 
 
 function reloadJS() {
