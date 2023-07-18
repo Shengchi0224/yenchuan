@@ -115,36 +115,33 @@ function toggleModal() {
   const layouts = document.querySelectorAll('.product__flavors__fixed__scroll__layout');
   const closeBtns = document.querySelectorAll('.close_btn');
 
+  if (btns.length === modals.length && btns.length === layouts.length && btns.length === closeBtns.length) {
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function() {
+        openModal(i);
+      });
+      closeBtns[i].addEventListener('click', function() {
+        closeModal(i);
+      });
+    }
+  } else {
+    console.log('Array lengths are not equal. Check if all elements are present.');
+  }
+
   function openModal(index) {
-    console.log('Opening modal:', index);
     if (modals[index] && layouts[index]) {
       modals[index].style.display = 'flex';
       layouts[index].style.zIndex = '999';
-    } else {
-      console.log('Modal or layout element not found:', index);
     }
   }
 
   function closeModal(index) {
-    console.log('Closing modal:', index);
     if (modals[index] && layouts[index]) {
       modals[index].style.display = 'none';
       layouts[index].style.zIndex = '3';
-    } else {
-      console.log('Modal or layout element not found:', index);
     }
   }
-
-  for (let i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', function() {
-      openModal(i);
-    });
-    closeBtns[i].addEventListener('click', function() {
-      closeModal(i);
-    });
-  }
 }
-
 
 function reloadJS() {
     resetWebflow();
