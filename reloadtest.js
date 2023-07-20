@@ -12,18 +12,18 @@ function resetWebflow() {
   // Reinitialize Webflow
   if (window.Webflow) {
     window.Webflow.destroy();
-    window.Webflow.ready(() => {
-      window.Webflow.require('ix2').init();
-      checkIx2Initialized();
-    });
-  } else {
-    console.log('Webflow is not available');
+    window.Webflow.ready();
+    window.Webflow.require('ix2').init();
   }
-}
 
-function checkIx2Initialized() {
+  // Reset Interactions 2.0 (ix2) animations
+  if (window.Webflow && window.Webflow.require('ix2').reset) {
+    window.Webflow.require('ix2').reset();
+    console.log('Interactions 2.0 (ix2) animations reset');
+  }
+
   // Check if Interactions 2.0 (ix2) is initialized
-  if (window.Webflow && window.Webflow.require('ix2').ready()) {
+  if (window.Webflow && window.Webflow.require('ix2').ready) {
     console.log('Interactions 2.0 (ix2) is initialized');
   } else {
     console.log('Interactions 2.0 (ix2) is not initialized');
@@ -146,9 +146,21 @@ function toggleModal() {
 }
 
 function reloadJS() {
-    reloadGSAP();
+  resetWebflow();  
+  reloadGSAP();
     reloadFinsweet();
+    // Wait for DOM to be ready
+  $(document).ready(function() {
+    // Animate elements using GSAP
     animateElements();
+
+    // Check if Webflow and Interactions 2.0 are initialized
+    if (window.Webflow && window.Webflow.require('ix2').ready) {
+      console.log('Interactions 2.0 (ix2) is initialized');
+    } else {
+      console.log('Interactions 2.0 (ix2) is not initialized');
+    }
+
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -187,7 +199,7 @@ function reloadJS() {
                 },
             },
         }).mount();
-       
+      });   
     }
 
     // Call the necessary functions when the page is loaded
