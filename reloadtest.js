@@ -3,11 +3,10 @@ function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
   console.log('Current webflowPageId:', webflowPageId);
-
-  // Generate a new random page ID
-  webflowPageId = 'page' + Math.random().toString(36).substr(2, 9);
+  const parser = new DOMParser();
+  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
+  webflowPageId = $(dom).find('body').text();
   $('html').attr('data-wf-page', webflowPageId);
-  console.log('New webflowPageId:', webflowPageId);
   console.log('Document reloaded');
 
   // Reinitialize Webflow
@@ -23,14 +22,12 @@ function resetWebflow() {
     console.log('Interactions 2.0 (ix2) animations reset');
   }
 
-  // Wait for a short delay to check if Interactions 2.0 (ix2) is initialized
-  setTimeout(function() {
-    if (window.Webflow && window.Webflow.require('ix2').ready) {
-      console.log('Interactions 2.0 (ix2) is initialized');
-    } else {
-      console.log('Interactions 2.0 (ix2) is not initialized');
-    }
-  }, 1000); // Adjust the delay time as needed
+  // Check if Interactions 2.0 (ix2) is initialized
+  if (window.Webflow && window.Webflow.require('ix2').ready) {
+    console.log('Interactions 2.0 (ix2) is initialized');
+  } else {
+    console.log('Interactions 2.0 (ix2) is not initialized');
+  }
 }
 
 function reloadGSAP() {
