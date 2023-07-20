@@ -3,10 +3,11 @@ function resetWebflow() {
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
   console.log('Current webflowPageId:', webflowPageId);
-  const parser = new DOMParser();
-  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
-  webflowPageId = $(dom).find('body').text();
+  
+  // Generate a new random page ID
+  webflowPageId = 'page' + Math.random().toString(36).substr(2, 9);
   $('html').attr('data-wf-page', webflowPageId);
+  console.log('New webflowPageId:', webflowPageId);
   console.log('Document reloaded');
 
   // Reinitialize Webflow
