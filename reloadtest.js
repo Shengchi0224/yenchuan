@@ -116,8 +116,11 @@ function animateElements() {
 function replayVideos() {
   const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
   videos.forEach((video) => {
-    video.currentTime = 0; // Reset the current time to the beginning
-    video.play(); // Start playing the video
+    // Check if the element is an HTML video element with the play method
+    if (video instanceof HTMLVideoElement && typeof video.play === "function") {
+      video.currentTime = 0; // Reset the current time to the beginning
+      video.play(); // Start playing the video
+    }
   });
 }
 
