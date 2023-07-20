@@ -12,18 +12,18 @@ function resetWebflow() {
   // Reinitialize Webflow
   if (window.Webflow) {
     window.Webflow.destroy();
-    window.Webflow.ready();
-    window.Webflow.require('ix2').init();
+    window.Webflow.ready(() => {
+      window.Webflow.require('ix2').init();
+      checkIx2Initialized();
+    });
+  } else {
+    console.log('Webflow is not available');
   }
+}
 
-  // Reset Interactions 2.0 (ix2) animations
-  if (window.Webflow && window.Webflow.require('ix2').reset) {
-    window.Webflow.require('ix2').reset();
-    console.log('Interactions 2.0 (ix2) animations reset');
-  }
-
+function checkIx2Initialized() {
   // Check if Interactions 2.0 (ix2) is initialized
-  if (window.Webflow && window.Webflow.require('ix2').ready) {
+  if (window.Webflow && window.Webflow.require('ix2').ready()) {
     console.log('Interactions 2.0 (ix2) is initialized');
   } else {
     console.log('Interactions 2.0 (ix2) is not initialized');
@@ -239,8 +239,8 @@ function reloadJS() {
 
     // Call the initial function when the page is loaded
     window.addEventListener("DOMContentLoaded", () => {
-        console.log('DOMContentLoaded - Initial function called');
-        initial();
+       console.log('DOMContentLoaded - Initial function called');
+       initial();
     });
 
     // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
