@@ -146,7 +146,6 @@ function toggleModal() {
 }
 
 function reloadJS() {
-    resetWebflow();
     reloadGSAP();
     reloadFinsweet();
     animateElements();
@@ -255,6 +254,7 @@ function reloadJS() {
             // Page transition occurred
             console.log('Page transition occurred');
             reloadJS();
+            resetWebflow();
         } else {
             // Initial page load
             console.log('Initial page load');
