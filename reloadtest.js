@@ -1,6 +1,8 @@
 function resetWebflow() {
+  console.log('Resetting Webflow...');
   // Reset Webflow functionality
   let webflowPageId = $('html').attr('data-wf-page');
+  console.log('Current webflowPageId:', webflowPageId);
   const parser = new DOMParser();
   const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
   webflowPageId = $(dom).find('body').text();
