@@ -1,11 +1,33 @@
 function resetWebflow() {
-  let parser = new DOMParser();
-  let dom = parser.parseFromString(data.next.html, "text/html");
-  let webflowPageId = $(dom).find("html").attr("data-wf-page");
-  $("html").attr("data-wf-page", webflowPageId);
-  window.Webflow && window.Webflow.destroy();
-  window.Webflow && window.Webflow.ready();
-  window.Webflow && window.Webflow.require("ix2").init();
+  console.log('Resetting Webflow...');
+  // Reset Webflow functionality
+  let webflowPageId = $('html').attr('data-wf-page');
+  console.log('Current webflowPageId:', webflowPageId);
+  const parser = new DOMParser();
+  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
+  webflowPageId = $(dom).find('body').text();
+  $('html').attr('data-wf-page', webflowPageId);
+  console.log('Document reloaded');
+
+  // Reinitialize Webflow
+  if (window.Webflow) {
+    window.Webflow.destroy();
+    window.Webflow.ready();
+    window.Webflow.require('ix2').init();
+  }
+
+  // Reset Interactions 2.0 (ix2) animations
+  if (window.Webflow && window.Webflow.require('ix2').reset) {
+    window.Webflow.require('ix2').reset();
+    console.log('Interactions 2.0 (ix2) animations reset');
+  }
+
+  // Check if Interactions 2.0 (ix2) is initialized
+  if (window.Webflow && window.Webflow.require('ix2').ready) {
+    console.log('Interactions 2.0 (ix2) is initialized');
+  } else {
+    console.log('Interactions 2.0 (ix2) is not initialized');
+  }
 }
 
 function reloadGSAP() {
