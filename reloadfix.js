@@ -1,48 +1,31 @@
 function resetWebflow() {
   console.log('Resetting Webflow...');
-  // Reset Webflow functionality
-  let webflowPageId = $('html').attr('data-wf-page');
-  console.log('Current webflowPageId:', webflowPageId);
-  const parser = new DOMParser();
-  const dom = parser.parseFromString('<!doctype html><body>' + webflowPageId, 'text/html');
-  webflowPageId = $(dom).find('body').text();
-  $('html').attr('data-wf-page', webflowPageId);
-  console.log('Document reloaded');
-
-  // Reinitialize Webflow
+  
+  // Check if Webflow exists
   if (window.Webflow) {
+    // Destroy Webflow to reset it
     window.Webflow.destroy();
-    window.Webflow.ready();
-    window.Webflow.require('ix2').init();
-  }
+    
+    // Let's ensure Webflow is ready and then initialize it
+    const intervalId = setInterval(() => {
+      if (window.Webflow.ready) {
+        window.Webflow.ready();
 
-  // Reset Interactions 2.0 (ix2) animations
-  if (window.Webflow) {
-    Webflow.require('ix2').getInitialStates({
-      elementApi: Webflow.require('ix2').elements,
-    }).forEach(function (state) {
-      const {
-        element,
-        actionItem
-      } = state;
-      Webflow.require('ix2').store.dispatch({
-        type: 'IX2_PLAYBACK_STATE',
-        payload: {
-          actionItemId: actionItem.id,
-          elementId: element.id,
-          isGeneral: element.is('BODY'),
-          currentState: 'RESET',
-        },
-      });
-    });
-    console.log('Interactions 2.0 (ix2) animations reset');
-  }
+        // Initialize interactions
+        if (window.Webflow.require('ix2')) {
+          window.Webflow.require('ix2').init();
+          console.log('Interactions 2.0 (ix2) initialized');
+        } else {
+          console.log('Interactions 2.0 (ix2) not available');
+        }
 
-  // Check if Interactions 2.0 (ix2) is initialized
-  if (window.Webflow && window.Webflow.require('ix2').ready) {
-    console.log('Interactions 2.0 (ix2) is initialized');
+        clearInterval(intervalId);
+      } else {
+        console.log('Waiting for Webflow to be ready...');
+      }
+    }, 100); // Try every 100ms
   } else {
-    console.log('Interactions 2.0 (ix2) is not initialized');
+    console.log('Webflow not available');
   }
 }
 
