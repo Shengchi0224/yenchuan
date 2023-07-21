@@ -100,6 +100,21 @@ function animateElements() {
             skewY: 0,
         }
     );
+  const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
+  gsap.to(productTextWrapper, {
+  scrollTrigger: {
+    trigger: '.slide_panel',
+    markers: true,
+    start: '95% center',
+    end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
+    scrub: true, // Allow scrubbing the animation timeline
+    onUpdate: (self) => {
+      const progress = self.progress;
+      const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
+      productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
+    },
+  },
+});
 }
 
 function replayVideos() {
