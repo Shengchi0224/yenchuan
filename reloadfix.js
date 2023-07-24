@@ -226,7 +226,7 @@ function reloadJS() {
 
     // Call the necessary functions when the page is loaded
     function initial() {
-        animateElements();
+        
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
@@ -284,13 +284,5 @@ function reloadJS() {
         // Perform necessary actions after page transition
         $(window).scrollTop(0);
 
-        if (data.current) {
-            // Page transition occurred
-            console.log('Page transition occurred');
-            reloadJS();
-        } else {
-            // Initial page load
-            console.log('Initial page load');
-            initial();
-        }
+      initial();
     });
