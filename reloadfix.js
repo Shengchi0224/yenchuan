@@ -132,6 +132,11 @@ function cleanupScrollTrigger() {
   });
 }
 
+function resetOnPageLoad() {
+  cleanupScrollTrigger(); // Cleanup existing ScrollTriggers
+  animateScrollTrigger(); // Initialize ScrollTrigger for the current page
+}
+
 function replayVideos() {
   const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
   videos.forEach((video) => {
@@ -192,7 +197,7 @@ function reloadJS() {
     } else {
       console.log('Interactions 2.0 (ix2) is not initialized');
     }
-    animateScrollTrigger();
+    resetOnPageLoad();
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -237,7 +242,7 @@ function reloadJS() {
     // Call the necessary functions when the page is loaded
     function initial() {
         animateText();
-        animateScrollTrigger();
+        resetOnPageLoad();
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
@@ -288,12 +293,9 @@ function reloadJS() {
     });
 
 // Use the barba.hooks.before event to execute cleanupScrollTrigger before the transition starts
-barba.hooks.before((data) => {
-  console.log('barba.hooks.before - Current:', data.current);
-  console.log('barba.hooks.before - Next:', data.next);
-
-  // Cleanup existing ScrollTriggers before the transition starts
-  cleanupScrollTrigger();
+barba.hooks.beforeEnter(() => {
+  console.log('barba.hooks.beforeEnter - Page is about to be entered');
+  resetOnPageLoad();
 });
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
@@ -308,7 +310,7 @@ barba.hooks.after((data) => {
     // Navigating back to the home page or refreshing the home page
     console.log('Initial page load or back to home page');
     animateText(); // Animate text using GSAP
-    animateScrollTrigger(); // Initialize ScrollTrigger for the current page
+    resetOnPageLoad();
   } else {
     // Page transition occurred
     console.log('Page transition occurred');
