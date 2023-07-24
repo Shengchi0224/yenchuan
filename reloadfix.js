@@ -309,3 +309,9 @@ function reloadJS() {
       // Refresh the ScrollTrigger after the page transition
     gsap.delayedCall(0.5, ScrollTrigger.refresh); // Delayed call to ensure the content is fully loaded
     });
+
+// Use the barba.hooks.newPageReady event to reinitialize the ScrollTrigger
+barba.hooks.newPageReady(() => {
+  console.log('barba.hooks.newPageReady - New page is ready');
+  animateScrollTrigger(); // Initialize ScrollTrigger for the current page
+});
