@@ -123,12 +123,13 @@ function animateScrollTrigger() {
       },
     },
   });
+}
 
-  // Add the trigger element to the ScrollTrigger array for cleanup on page transition
-  ScrollTrigger.saveStyles(triggerElement);
-  ScrollTrigger.saveStyles(productTextWrapper);
-
-  ScrollTrigger.getAll().forEach((t) => t.kill());
+function cleanupScrollTrigger() {
+  // Remove all ScrollTriggers
+  gsap.utils.toArray(ScrollTrigger.getAll()).forEach((trigger) => {
+    trigger.kill();
+  });
 }
 
 function replayVideos() {
@@ -297,7 +298,8 @@ function reloadJS() {
        if (data.current) {
             // Page transition occurred
             console.log('Page transition occurred');
-            reloadJS();
+           cleanupScrollTrigger(); 
+           reloadJS();
         } else {
             // Initial page load
             console.log('Initial page load');
