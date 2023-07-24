@@ -287,23 +287,32 @@ function reloadJS() {
        initial();
     });
 
-    // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
-    barba.hooks.after((data) => {
-        console.log('barba.hooks.after - Current:', data.current);
-        console.log('barba.hooks.after - Next:', data.next);
+// Use the barba.hooks.before event to execute cleanupScrollTrigger before the transition starts
+barba.hooks.before((data) => {
+  console.log('barba.hooks.before - Current:', data.current);
+  console.log('barba.hooks.before - Next:', data.next);
 
-        // Perform necessary actions after page transition
-        $(window).scrollTop(0);
+  // Cleanup existing ScrollTriggers before the transition starts
+  cleanupScrollTrigger();
+});
 
-       if (data.current) {
-            // Page transition occurred
-            console.log('Page transition occurred');
-           cleanupScrollTrigger(); 
-           reloadJS();
-        } else {
-    // Initial page load or back to home page
+// Use the barba.hooks.after event to execute the necessary functions when the transition is completed
+barba.hooks.after((data) => {
+  console.log('barba.hooks.after - Current:', data.current);
+  console.log('barba.hooks.after - Next:', data.next);
+
+  // Perform necessary actions after page transition
+  $(window).scrollTop(0);
+
+  if (!data.next || data.current.url.path === data.next.url.path) {
+    // Navigating back to the home page or refreshing the home page
     console.log('Initial page load or back to home page');
     animateText(); // Animate text using GSAP
     animateScrollTrigger(); // Initialize ScrollTrigger for the current page
+  } else {
+    // Page transition occurred
+    console.log('Page transition occurred');
+    reloadJS();
+    resetWebflow();
   }
 });
