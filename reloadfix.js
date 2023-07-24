@@ -303,8 +303,9 @@ function reloadJS() {
         } else {
             // Initial page load
             console.log('Initial page load');
-            initial();
-        }
+            animateText(); // Animate text using GSAP
+            animateScrollTrigger(); // Initialize ScrollTrigger for the current page
+       }
       // Refresh the ScrollTrigger after the page transition
     gsap.delayedCall(0.5, ScrollTrigger.refresh); // Delayed call to ensure the content is fully loaded
     });
