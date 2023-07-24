@@ -75,45 +75,51 @@ function reloadFinsweet() {
 }
 
 function animateElements() {
-    // Animate elements using GSAP
-    const textrev = gsap.timeline();
+  // Animate elements using GSAP
+  const textrev = gsap.timeline();
 
-    textrev.from('.hero_text', 1.8, {
-        y: 200,
-        ease: 'power4.out',
-        delay: 1,
-        skewY: 10,
-        stagger: {
-            amount: 0.4,
-        },
-    });
-
-    gsap.fromTo(
-        '.text', {
-            y: '100%',
-            skewY: 10,
-        }, {
-            duration: 2,
-            ease: 'power4.out',
-            y: '0%',
-            stagger: 0.2,
-            skewY: 0,
-        }
-    );
-  const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
-  gsap.to(productTextWrapper, {
-  scrollTrigger: {
-    trigger: '.slide_panel',
-    start: '95% center',
-    end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
-    scrub: true, // Allow scrubbing the animation timeline
-    onUpdate: (self) => {
-      const progress = self.progress;
-      const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
-      productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
+  textrev.from('.hero_text', 1.8, {
+    y: 200,
+    ease: 'power4.out',
+    delay: 1,
+    skewY: 10,
+    stagger: {
+      amount: 0.4,
     },
-  },
-});
+  });
+
+  gsap.fromTo(
+    '.text',
+    {
+      y: '100%',
+      skewY: 10,
+    },
+    {
+      duration: 2,
+      ease: 'power4.out',
+      y: '0%',
+      stagger: 0.2,
+      skewY: 0,
+    }
+  );
+
+  const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
+  if (productTextWrapper) {
+    gsap.to(productTextWrapper, {
+      scrollTrigger: {
+        trigger: '.slide_panel',
+        markers: true,
+        start: '95% center',
+        end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
+        scrub: true, // Allow scrubbing the animation timeline
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
+          productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
+        },
+      },
+    });
+  }
 }
 
 function replayVideos() {
