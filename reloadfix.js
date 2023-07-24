@@ -106,19 +106,29 @@ function animateText() {
 
 function animateScrollTrigger() {
   const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
+  const triggerElement = '.slide_panel';
+
+  // Initialize ScrollTrigger for the current page
   gsap.to(productTextWrapper, {
     scrollTrigger: {
-      trigger: '.slide_panel',
+      trigger: triggerElement,
+      markers: true,
       start: '95% center',
-      end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
-      scrub: true, // Allow scrubbing the animation timeline
+      end: 'bottom center',
+      scrub: true,
       onUpdate: (self) => {
         const progress = self.progress;
-        const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
-        productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
+        const translateY = progress * -15;
+        productTextWrapper.style.transform = `translateY(${translateY}rem)`;
       },
     },
   });
+
+  // Add the trigger element to the ScrollTrigger array for cleanup on page transition
+  ScrollTrigger.saveStyles(triggerElement);
+  ScrollTrigger.saveStyles(productTextWrapper);
+
+  ScrollTrigger.getAll().forEach((t) => t.kill());
 }
 
 function replayVideos() {
