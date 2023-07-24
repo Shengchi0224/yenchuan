@@ -110,12 +110,12 @@ function animateElements() {
         trigger: '.slide_panel',
         markers: true,
         start: '95% center',
-        end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
-        scrub: true, // Allow scrubbing the animation timeline
+        end: 'bottom center',
+        scrub: true,
         onUpdate: (self) => {
           const progress = self.progress;
-          const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
-          productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
+          const translateY = progress * -15;
+          productTextWrapper.style.transform = `translateY(${translateY}rem)`;
         },
       },
     });
@@ -293,4 +293,6 @@ function reloadJS() {
             console.log('Initial page load');
             initial();
         }
+      // Refresh the ScrollTrigger after the page transition
+    gsap.delayedCall(0.5, ScrollTrigger.refresh); // Delayed call to ensure the content is fully loaded
     });
