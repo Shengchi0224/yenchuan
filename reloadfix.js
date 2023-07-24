@@ -284,5 +284,13 @@ function reloadJS() {
         // Perform necessary actions after page transition
         $(window).scrollTop(0);
 
-      initial();
+       if (data.current) {
+            // Page transition occurred
+            console.log('Page transition occurred');
+            reloadJS();
+        } else {
+            // Initial page load
+            console.log('Initial page load');
+            initial();
+        }
     });
