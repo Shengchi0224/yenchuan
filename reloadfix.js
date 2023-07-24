@@ -74,8 +74,8 @@ function reloadFinsweet() {
   }
 }
 
-function animateElements() {
-  // Animate elements using GSAP
+function animateText() {
+  // Animate text elements using GSAP
   const textrev = gsap.timeline();
 
   textrev.from('.hero_text', 1.8, {
@@ -102,24 +102,24 @@ function animateElements() {
       skewY: 0,
     }
   );
+}
 
+function animateScrollTrigger() {
   const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
-  if (productTextWrapper) {
-    gsap.to(productTextWrapper, {
-      scrollTrigger: {
-        trigger: '.slide_panel',
-        markers: true,
-        start: '95% center',
-        end: 'bottom center',
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const translateY = progress * -15;
-          productTextWrapper.style.transform = `translateY(${translateY}rem)`;
-        },
+  gsap.to(productTextWrapper, {
+    scrollTrigger: {
+      trigger: '.slide_panel',
+      markers: true,
+      start: '95% center',
+      end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
+      scrub: true, // Allow scrubbing the animation timeline
+      onUpdate: (self) => {
+        const progress = self.progress;
+        const translateY = progress * -15; // Calculate the translateY value for moving the element up by 15 rem
+        productTextWrapper.style.transform = `translateY(${translateY}rem)`; // Move the element vertically
       },
-    });
-  }
+    },
+  });
 }
 
 function replayVideos() {
@@ -170,11 +170,11 @@ function toggleModal() {
 function reloadJS() {
   resetWebflow();  
   reloadGSAP();
-    reloadFinsweet();
+  reloadFinsweet();
     // Wait for DOM to be ready
   $(document).ready(function() {
     // Animate elements using GSAP
-    animateElements();
+    animateText();
 
     // Check if Webflow and Interactions 2.0 are initialized
     if (window.Webflow && window.Webflow.require('ix2').ready) {
@@ -182,7 +182,7 @@ function reloadJS() {
     } else {
       console.log('Interactions 2.0 (ix2) is not initialized');
     }
-
+    animateScrollTrigger();
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -226,7 +226,8 @@ function reloadJS() {
 
     // Call the necessary functions when the page is loaded
     function initial() {
-        
+        animateText();
+        animateScrollTrigger();
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
