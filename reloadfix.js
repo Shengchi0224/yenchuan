@@ -109,7 +109,6 @@ function animateScrollTrigger() {
   gsap.to(productTextWrapper, {
     scrollTrigger: {
       trigger: '.slide_panel',
-      markers: true,
       start: '95% center',
       end: 'bottom center', // Stop the animation when the trigger element reaches the center of the viewport
       scrub: true, // Allow scrubbing the animation timeline
