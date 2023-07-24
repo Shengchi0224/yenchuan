@@ -306,3 +306,4 @@ function reloadJS() {
     animateText(); // Animate text using GSAP
     animateScrollTrigger(); // Initialize ScrollTrigger for the current page
   }
+});
