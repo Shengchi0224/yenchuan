@@ -60,27 +60,6 @@ function reloadFinsweet() {
     // If the existing script tag is not found, append the new script to the document head
     document.head.appendChild(newCmssortScript);
   }
-
-  function reloadScrollTrigger() {
-  // Reload ScrollTrigger library
-  const scrollTriggerScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"]');
-  const newScript = document.createElement('script');
-  newScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js';
-
-  newScript.onload = function () {
-    console.log('ScrollTrigger library reloaded!');
-    // Reinitialize ScrollTriggers after the library is reloaded
-    resetOnPageLoad();
-  };
-
-  if (scrollTriggerScript) {
-    scrollTriggerScript.parentNode.replaceChild(newScript, scrollTriggerScript);
-  } else {
-    // If the existing script tag is not found, append the new script to the document head
-    document.head.appendChild(newScript);
-  }
-}
-  
   // Reload Finsweet attribute filter library
   const cmsfilterScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js"]');
   const newCmsfilterScript = document.createElement('script');
@@ -126,27 +105,31 @@ function animateText() {
 
 function animateScrollTrigger() {
   const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
-  gsap.to(productTextWrapper, {
-    scrollTrigger: {
-      trigger: '.slide_panel',
-      markers: true,
-      start: '95% center',
-      end: 'bottom center',
-      scrub: true,
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const translateY = progress * -15;
-        productTextWrapper.style.transform = `translateY(${translateY}rem)`;
+  if (productTextWrapper) {
+    gsap.to(productTextWrapper, {
+      scrollTrigger: {
+        trigger: '.slide_panel',
+        markers: true,
+        start: '95% center',
+        end: 'bottom center',
+        scrub: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          const translateY = progress * -15;
+          productTextWrapper.style.transform = `translateY(${translateY}rem)`;
+        },
       },
-    },
-  });
+    });
+  }
 }
 
 function cleanupScrollTrigger() {
   // Remove all ScrollTriggers
-  gsap.utils.toArray(ScrollTrigger.getAll()).forEach((trigger) => {
-    trigger.kill();
-  });
+  if (typeof ScrollTrigger !== 'undefined') {
+    gsap.utils.toArray(ScrollTrigger.getAll()).forEach((trigger) => {
+      trigger.kill();
+    });
+  }
 }
 
 function resetOnPageLoad() {
