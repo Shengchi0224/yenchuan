@@ -214,7 +214,7 @@ function reloadJS() {
     } else {
       console.log('Interactions 2.0 (ix2) is not initialized');
     }
-    animateScrollTrigger();
+    resetOnPageLoad();
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -259,7 +259,7 @@ function reloadJS() {
     // Call the necessary functions when the page is loaded
     function initial() {
         animateText();
-        animateScrollTrigger();
+        resetOnPageLoad();
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
@@ -312,7 +312,7 @@ function reloadJS() {
 // Use the barba.hooks.before event to execute cleanupScrollTrigger before the transition starts
 barba.hooks.beforeEnter(() => {
   console.log('barba.hooks.beforeEnter - Page is about to be entered');
-  reloadScrollTrigger();
+  cleanupScrollTrigger();
 });
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
