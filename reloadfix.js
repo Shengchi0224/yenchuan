@@ -103,39 +103,6 @@ function animateText() {
   );
 }
 
-function animateScrollTrigger() {
-  const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
-  if (productTextWrapper) {
-    gsap.to(productTextWrapper, {
-      scrollTrigger: {
-        trigger: '.slide_panel',
-        markers: true,
-        start: '95% center',
-        end: 'bottom center',
-        scrub: true,
-        onUpdate: (self) => {
-          const progress = self.progress;
-          const translateY = progress * -15;
-          productTextWrapper.style.transform = `translateY(${translateY}rem)`;
-        },
-      },
-    });
-  }
-}
-
-function cleanupScrollTrigger() {
-  // Remove all ScrollTriggers
-  if (typeof ScrollTrigger !== 'undefined') {
-    gsap.utils.toArray(ScrollTrigger.getAll()).forEach((trigger) => {
-      trigger.kill();
-    });
-  }
-}
-
-function resetOnPageLoad() {
-  cleanupScrollTrigger(); // Cleanup existing ScrollTriggers
-  animateScrollTrigger(); // Initialize ScrollTrigger for the current page
-}
 
 function replayVideos() {
   const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
@@ -197,7 +164,6 @@ function reloadJS() {
     } else {
       console.log('Interactions 2.0 (ix2) is not initialized');
     }
-    resetOnPageLoad();
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -242,7 +208,6 @@ function reloadJS() {
     // Call the necessary functions when the page is loaded
     function initial() {
         animateText();
-        resetOnPageLoad();
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
@@ -291,12 +256,6 @@ function reloadJS() {
        console.log('DOMContentLoaded - Initial function called');
        initial();
     });
-
-// Use the barba.hooks.before event to execute cleanupScrollTrigger before the transition starts
-barba.hooks.beforeEnter(() => {
-  console.log('barba.hooks.beforeEnter - Page is about to be entered');
-  cleanupScrollTrigger();
-});
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
 barba.hooks.after((data) => {
