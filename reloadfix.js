@@ -61,6 +61,26 @@ function reloadFinsweet() {
     document.head.appendChild(newCmssortScript);
   }
 
+  function reloadScrollTrigger() {
+  // Reload ScrollTrigger library
+  const scrollTriggerScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"]');
+  const newScript = document.createElement('script');
+  newScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js';
+
+  newScript.onload = function () {
+    console.log('ScrollTrigger library reloaded!');
+    // Reinitialize ScrollTriggers after the library is reloaded
+    resetOnPageLoad();
+  };
+
+  if (scrollTriggerScript) {
+    scrollTriggerScript.parentNode.replaceChild(newScript, scrollTriggerScript);
+  } else {
+    // If the existing script tag is not found, append the new script to the document head
+    document.head.appendChild(newScript);
+  }
+}
+  
   // Reload Finsweet attribute filter library
   const cmsfilterScript = document.querySelector('script[src="https://cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js"]');
   const newCmsfilterScript = document.createElement('script');
@@ -106,12 +126,9 @@ function animateText() {
 
 function animateScrollTrigger() {
   const productTextWrapper = document.querySelector('.products__flavors__text__wrapper');
-  const triggerElement = '.slide_panel';
-
-  // Initialize ScrollTrigger for the current page
   gsap.to(productTextWrapper, {
     scrollTrigger: {
-      trigger: triggerElement,
+      trigger: '.slide_panel',
       markers: true,
       start: '95% center',
       end: 'bottom center',
@@ -295,7 +312,7 @@ function reloadJS() {
 // Use the barba.hooks.before event to execute cleanupScrollTrigger before the transition starts
 barba.hooks.beforeEnter(() => {
   console.log('barba.hooks.beforeEnter - Page is about to be entered');
-  resetOnPageLoad();
+  reloadScrollTrigger();
 });
 
 // Use the barba.hooks.after event to execute the necessary functions when the transition is completed
@@ -306,12 +323,7 @@ barba.hooks.after((data) => {
   // Perform necessary actions after page transition
   $(window).scrollTop(0);
 
-  if (!data.next || data.current.url.path === data.next.url.path) {
-    // Navigating back to the home page or refreshing the home page
-    console.log('Initial page load or back to home page');
-    animateText(); // Animate text using GSAP
-    resetOnPageLoad();
-  } else {
+  if (data.current.container) {
     // Page transition occurred
     console.log('Page transition occurred');
     reloadJS();
