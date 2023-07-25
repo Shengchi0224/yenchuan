@@ -214,7 +214,7 @@ function reloadJS() {
     } else {
       console.log('Interactions 2.0 (ix2) is not initialized');
     }
-    resetOnPageLoad();
+    animateScrollTrigger();
     replayVideos();
     toggleModal();
     new Splide('.splide', {
@@ -259,7 +259,7 @@ function reloadJS() {
     // Call the necessary functions when the page is loaded
     function initial() {
         animateText();
-        resetOnPageLoad();
+        animateScrollTrigger();
         reloadGSAP();
         reloadFinsweet();
         resetWebflow();
