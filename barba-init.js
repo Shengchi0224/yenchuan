@@ -97,7 +97,7 @@ barba.init({
         enterAnimation1();
       },
       async once(data) {
-        await delay(0);
+        await delay(500);
         enterAnimation1();
       },
     },
