@@ -149,6 +149,21 @@ function toggleModal() {
   }
 }
 
+function checkIfScriptsAreLoaded() {
+  return new Promise((resolve) => {
+    const interval = setInterval(() => {
+      const gsap = window.gsap;
+      const Webflow = window.Webflow;
+
+      if (gsap && Webflow) {
+        // Both GSAP and Webflow are loaded, we can stop checking
+        clearInterval(interval);
+        resolve();
+      }
+    }, 100); // Check every 100 milliseconds
+  });
+}
+
 function reloadJS() {
   resetWebflow();  
   reloadGSAP();
@@ -268,7 +283,12 @@ barba.hooks.after((data) => {
   if (data.current.container) {
     // Page transition occurred
     console.log('Page transition occurred');
-    reloadJS();
-    resetWebflow();
+
+    // Check if all scripts are loaded
+    checkIfScriptsAreLoaded().then(() => {
+      // Now you can call your functions
+      reloadJS();
+      resetWebflow();
+    });
   }
 });
