@@ -124,7 +124,7 @@ barba.init({
     },
     {
       preventRunning: true,
-      name: "Animationhome",
+      name: "Animationsmall",
       to: {
         namespace: ["small"],
       },
