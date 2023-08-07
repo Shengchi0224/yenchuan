@@ -66,6 +66,27 @@ function enterAnimation1() {
   );
 }
 
+function enterAnimation2() {
+  gsap.fromTo(
+    ".loading-screen",
+    {
+      y: '0%',
+    },
+    {
+      duration: 1.5,
+      y: '30%',
+      ease: "power2.out",
+      backgroundColor: "white",
+      onComplete: () => {
+        gsap.to(".loading-screen", {
+          opacity: 0,
+          display:"none",
+        });
+      },
+    }
+  );
+}
+
 barba.use(barbaPrefetch);
 barba.init({
   transitions: [
@@ -99,6 +120,24 @@ barba.init({
       async once(data) {
         await delay(200);
         enterAnimation1();
+      },
+    },
+    {
+      preventRunning: true,
+      name: "Animationhome",
+      to: {
+        namespace: ["small"],
+      },
+      async leave(data) {
+        leaveAnimation();
+        await delay(1000);
+      },
+      async after(data) {
+        enterAnimation2();
+      },
+      async once(data) {
+        await delay(200);
+        enterAnimation2();
       },
     },
   ],
