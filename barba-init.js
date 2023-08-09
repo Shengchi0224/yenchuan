@@ -66,7 +66,18 @@ function enterAnimation1() {
   );
 }
 
+function getScreenWidth() {
+  return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+}
+
 function enterAnimation2() {
+  const screenWidth = getScreenWidth();
+  let yValue = '30%';
+
+  if (screenWidth < 768) {
+    yValue = `+=17rem`;
+  }
+
   gsap.fromTo(
     ".loading-screen",
     {
@@ -74,13 +85,13 @@ function enterAnimation2() {
     },
     {
       duration: 1.5,
-      y: '30%',
+      y: yValue,
       ease: "power2.out",
       backgroundColor: "white",
       onComplete: () => {
         gsap.to(".loading-screen", {
           opacity: 0,
-          display:"none",
+          display: "none",
         });
       },
     }
