@@ -29,6 +29,18 @@ function resetWebflow() {
   }
 }
 
+// Function to load Lottie animation
+function loadLottieAnimation() {
+    // Replace 'your-animation-element-id' with the actual ID of the element containing your Lottie animation
+    var animationElement = document.getElementById('lottie-container');
+
+    // Play the Lottie animation using Webflow's API
+    if (animationElement) {
+        // Replace 'w-lightbox-show' with the class used to trigger the animation in Webflow
+        animationElement.classList.add('w-lightbox-show');
+    }
+}
+
 function reloadGSAP() {
     // Reload GSAP library
     const gsapScript = document.querySelector('script[src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"]');
@@ -217,6 +229,7 @@ function reloadJS() {
                 },
             },
         }).mount();
+      setTimeout(loadLottieAnimation, 3000);
       });   
     }
 
@@ -264,6 +277,7 @@ function reloadJS() {
                 },
             },
         }).mount();
+        setTimeout(loadLottieAnimation, 3000);
     }
 
     // Call the initial function when the page is loaded
