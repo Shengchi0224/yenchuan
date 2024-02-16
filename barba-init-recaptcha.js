@@ -118,7 +118,7 @@ barba.init({
       preventRunning: true,
       name: "Animationsmall",
       to: {
-        namespace: ["small"],
+        namespace: ["small", "contact"],
       },
       async leave(data) {
         leaveAnimation();
@@ -134,7 +134,7 @@ barba.init({
     },
   ],
   views: [{
-    namespace: 'index',
+    namespace: 'contact',
     beforeEnter() {
       grecaptcha.ready(() => {
         grecaptcha.execute(key, {
