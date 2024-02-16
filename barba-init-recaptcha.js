@@ -116,7 +116,7 @@ barba.init({
       preventRunning: true,
       name: "Animationsmall",
       to: {
-        namespace: ["small", "contact"],
+        namespace: ["small"],
       },
       async leave(data) {
         leaveAnimation();
@@ -130,7 +130,7 @@ barba.init({
         enterAnimation2();
       },
     },
-    {
+{
     preventRunning: true,
     name: "SharedAnimation",
     to: {
@@ -145,8 +145,9 @@ barba.init({
         // Load reCAPTCHA script dynamically only for "contact" page
         if (data.url.includes('contact')) {
             if (!window.grecaptcha) {
+                const siteKey = '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'; // Replace 'YOUR_SITE_KEY' with your actual reCAPTCHA site key
                 const script = document.createElement('script');
-                script.src = 'https://www.google.com/recaptcha/api.js?render=' + 6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co;
+                script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
                 script.async = true;
                 document.body.appendChild(script);
 
