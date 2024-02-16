@@ -110,79 +110,45 @@ barba.init({
         await delay(1000);
       },
       async after(data) {
-        enterAnimation();
+        // Check the namespace of the next page and apply specific logic
+        switch (data.next.namespace) {
+          case 'contact':
+            enterAnimation2(); // Use the animation for the contact page
+            renderReCaptcha(); // Render reCAPTCHA specifically for the contact page
+            break;
+          case 'full':
+            enterAnimation1(); // Use the animation intended for 'full' namespace
+            break;
+          case 'small':
+            enterAnimation2(); // Use the animation intended for 'small' namespace
+            break;
+          default:
+            enterAnimation(); // Default animation for any other pages
+            break;
+        }
       },
       async once(data) {
-        enterAnimation();
-      },
-    },
-    {
-      preventRunning: true,
-      name: "Animationhome",
-      to: {
-        namespace: ["full"],
-      },
-      async leave(data) {
-        leaveAnimation();
-        await delay(1000);
-      },
-      async after(data) {
-        enterAnimation1();
-      },
-      async once(data) {
-        await delay(200);
-        enterAnimation1();
-      },
-    },
-    {
-      preventRunning: true,
-      name: "Animationsmall",
-      to: {
-        namespace: ["small"],
-      },
-      async leave(data) {
-        leaveAnimation();
-        await delay(1000);
-      },
-      async after(data) {
-        enterAnimation2();
-      },
-      async once(data) {
-        await delay(200);
-        enterAnimation2();
-      },
-    },
-    {
-      preventRunning: true,
-      name: "Animationcon",
-      to: {
-        namespace: ["contact"],
-      },
-      async leave(data) {
-        leaveAnimation();
-        await delay(1000);
-      },
-      async after(data) {
-        enterAnimation2();
-        renderReCaptcha(); // Render reCAPTCHA after entering the page
-      },
-      async once(data) {
-        await delay(200);
-        enterAnimation2();
+        // Handle the initial load with similar logic
+        if (data.next.namespace === 'contact') {
+          enterAnimation2();
+          renderReCaptcha();
+        } else if (data.next.namespace === 'full') {
+          enterAnimation1();
+        } else if (data.next.namespace === 'small') {
+          enterAnimation2();
+        } else {
+          enterAnimation();
+        }
       },
     },
   ],
 });
 
 function renderReCaptcha() {
-  // Check if the reCAPTCHA element exists and if grecaptcha is defined
-  if (window.grecaptcha && document.querySelector('.g-recaptcha')) {
-    // If so, render reCAPTCHA
-    grecaptcha.render('g-recaptcha', {
-      'sitekey' : '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'
+  // Ensure reCAPTCHA is rendered only for the contact page
+  if (document.querySelector('.g-recaptcha')) {
+    window.grecaptcha?.render('g-recaptcha', {
+      'sitekey': '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'
     });
-  } else {
-    // If not, you might want to log an error or handle this case appropriately
-    console.log('reCAPTCHA element or grecaptcha not found.');
   }
 }
