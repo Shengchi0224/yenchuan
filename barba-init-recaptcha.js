@@ -131,65 +131,65 @@ barba.init({
       },
     },
     {
-            preventRunning: true,
-            name: "SharedAnimation",
-            to: {
-                namespace: "contact", // Only applies to "contact" namespace
-            },
-            leave(data) {
-                // Your existing leave animation
-                leaveAnimation();
-                await delay(1000);
-            },
-            async after(data) {
-                // Load reCAPTCHA script dynamically only for "contact" page
-                if (data.url.includes('contact')) {
-                    if (!window.grecaptcha) {
-                        const script = document.createElement('script');
-                        script.src = 'https://www.google.com/recaptcha/api.js?render=' + 6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co;
-                        script.async = true;
-                        document.body.appendChild(script);
+    preventRunning: true,
+    name: "SharedAnimation",
+    to: {
+        namespace: "contact", // Only applies to "contact" namespace
+    },
+    async leave(data) { // Mark the leave method as async
+        // Your existing leave animation
+        leaveAnimation();
+        await delay(1000);
+    },
+    async after(data) {
+        // Load reCAPTCHA script dynamically only for "contact" page
+        if (data.url.includes('contact')) {
+            if (!window.grecaptcha) {
+                const script = document.createElement('script');
+                script.src = 'https://www.google.com/recaptcha/api.js?render=' + 6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co;
+                script.async = true;
+                document.body.appendChild(script);
 
-                        await new Promise((resolve) => {
-                            window.onRecaptchaApiLoaded = resolve;
-                        });
-                    }
+                await new Promise((resolve) => {
+                    window.onRecaptchaApiLoaded = resolve;
+                });
+            }
 
-                    // Initialize reCAPTCHA on form submission
-                    const form = document.getElementById('email-form-2'); // Replace with your actual form ID
-                    form.addEventListener('submit', async (event) => {
-                        event.preventDefault();
+            // Initialize reCAPTCHA on form submission
+            const form = document.getElementById('email-form-2'); // Replace with your actual form ID
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
 
-                        if (!window.grecaptcha) {
-                            console.error('reCAPTCHA API not loaded yet');
-                            return;
-                        }
-
-                        const token = await grecaptcha.execute();
-
-                        // Send form data and reCAPTCHA token to your server-side endpoint
-                        const response = await fetch('/contact', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                formData: new FormData(form),
-                                token
-                            })
-                        });
-
-                        if (response.ok) {
-                            // Handle successful submission (e.g., redirect, show confirmation)
-                            alert('Form submitted successfully');
-                        } else {
-                            // Handle errors (e.g., display error message)
-                            const error = await response.text();
-                            console.error('Error submitting form:', error);
-                        }
-                    });
+                if (!window.grecaptcha) {
+                    console.error('reCAPTCHA API not loaded yet');
+                    return;
                 }
 
-                // Shared animation for both "contact" and "small"
-                enterAnimation2(); // Or use desired animation function
-            }
+                const token = await grecaptcha.execute();
+
+                // Send form data and reCAPTCHA token to your server-side endpoint
+                const response = await fetch('/contact', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        formData: new FormData(form),
+                        token
+                    })
+                });
+
+                if (response.ok) {
+                    // Handle successful submission (e.g., redirect, show confirmation)
+                    alert('Form submitted successfully');
+                } else {
+                    // Handle errors (e.g., display error message)
+                    const error = await response.text();
+                    console.error('Error submitting form:', error);
+                }
+            });
         }
+
+        // Shared animation for both "contact" and "small"
+        enterAnimation2(); // Or use desired animation function
+    }
+}
   ],
 });
