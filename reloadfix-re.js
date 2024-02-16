@@ -94,25 +94,45 @@ function loadReCaptcha() {
   // Check if the reCAPTCHA script is already loaded
   const recaptchaScriptTag = document.querySelector('script[src="https://www.google.com/recaptcha/api.js"]');
   
-  // If not present, create and append the script tag
   if (!recaptchaScriptTag) {
     const script = document.createElement('script');
-    script.src = 'https://www.google.com/recaptcha/api.js?onload=onReCaptchaLoad&render=explicit';
+    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
     script.async = true;
     script.defer = true;
+    script.onload = onReCaptchaScriptLoad; // Set callback for when script is loaded
     document.body.appendChild(script);
   } else {
-    // If already loaded, explicitly render reCAPTCHA widgets
-    if (typeof grecaptcha !== 'undefined') {
-      grecaptcha.render();
-    }
+    // If the script is already present, attempt to re-render the reCAPTCHA
+    onReCaptchaScriptLoad();
   }
 }
 
-// Optional: Define a callback if you need to do something once reCAPTCHA is loaded
-function onReCaptchaLoad() {
-  console.log('reCAPTCHA loaded and rendered.');
+function onReCaptchaScriptLoad() {
+  console.log('reCAPTCHA script loaded or already present.');
+
+  // Explicitly render reCAPTCHA for the specific site key
+  // This assumes grecaptcha is available and your page has elements prepared for reCAPTCHA
+  renderReCaptcha();
 }
+
+function renderReCaptcha() {
+  // Ensure grecaptcha is loaded
+  if (typeof grecaptcha !== 'undefined') {
+    // Find all reCAPTCHA elements by class
+    document.querySelectorAll('.g-recaptcha').forEach(function(element) {
+      // Check if the element already has a rendered reCAPTCHA to avoid duplicating it
+      if (!element.innerHTML.trim()) {
+        // Use the 'data-sitekey' attribute of the element to initialize the reCAPTCHA
+        grecaptcha.render(element, {
+          'sitekey': element.getAttribute('data-sitekey')
+        });
+      }
+    });
+  } else {
+    console.log('grecaptcha not defined.');
+  }
+}
+
 
 function replayVideos() {
   const videos = document.querySelectorAll("#myVideo, #myVideo-1, #hero-bgvids, #hero-bgvids-1");
