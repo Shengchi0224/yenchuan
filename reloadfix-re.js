@@ -117,14 +117,14 @@ function onReCaptchaScriptLoad() {
 
 // Function to populate current date in the hidden input field
 function populateCurrentDate() {
-  let currentDate = new Date();
-  let dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][currentDate.getDay()];
-  let dateStr = `${currentDate.toLocaleDateString()} (${dayOfWeek})`;
-
-  // Set the value of the hidden input field
   let submissionDateField = document.getElementById("submissionDate");
   if (submissionDateField) {
+    let currentDate = new Date();
+    let dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][currentDate.getDay()];
+    let dateStr = `${currentDate.toLocaleDateString()} (${dayOfWeek})`;
     submissionDateField.value = dateStr;
+  } else {
+    console.log('submissionDate element not found on this page.');
   }
 }
 
@@ -344,8 +344,9 @@ barba.hooks.after((data) => {
       // Now you can call your functions
       reloadJS();
       loadReCaptcha();
-      handleBarbaTransition();
       resetWebflow();
+
+      handleBarbaTransition();
     });
   }
 });
