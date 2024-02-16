@@ -115,6 +115,31 @@ function onReCaptchaScriptLoad() {
   renderReCaptcha();
 }
 
+// Function to populate current date in the hidden input field
+function populateCurrentDate() {
+  let currentDate = new Date();
+  let dayOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][currentDate.getDay()];
+  let dateStr = `${currentDate.toLocaleDateString()} (${dayOfWeek})`;
+
+  // Set the value of the hidden input field
+  let submissionDateField = document.getElementById("submissionDate");
+  if (submissionDateField) {
+    submissionDateField.value = dateStr;
+  }
+}
+
+// Function to be called after each Barba.js transition
+function handleBarbaTransition() {
+  // Populate the submission date if on the contact page
+  populateCurrentDate();
+}
+
+// Initial call for page load
+document.addEventListener("DOMContentLoaded", function() {
+  populateCurrentDate();
+});
+
+
 function renderReCaptcha() {
   // Ensure grecaptcha is loaded
   if (typeof grecaptcha !== 'undefined') {
@@ -319,6 +344,7 @@ barba.hooks.after((data) => {
       // Now you can call your functions
       reloadJS();
       loadReCaptcha();
+      handleBarbaTransition();
       resetWebflow();
     });
   }
