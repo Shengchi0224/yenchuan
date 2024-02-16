@@ -70,6 +70,7 @@ function getScreenWidth() {
   return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 }
 
+
 function enterAnimation2() {
   const screenWidth = getScreenWidth();
   let yValue = '30%';
@@ -96,6 +97,19 @@ function enterAnimation2() {
       },
     }
   );
+}
+
+function renderReCaptcha() {
+  // Check if the reCAPTCHA element exists and if grecaptcha is defined
+  if (window.grecaptcha && document.querySelector('.g-recaptcha')) {
+    // If so, render reCAPTCHA
+    grecaptcha.render('g-recaptcha', {
+      'sitekey' : '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'
+    });
+  } else {
+    // If not, you might want to log an error or handle this case appropriately
+    console.log('reCAPTCHA element or grecaptcha not found.');
+  }
 }
 
 barba.use(barbaPrefetch);
@@ -137,7 +151,7 @@ barba.init({
       preventRunning: true,
       name: "Animationsmall",
       to: {
-        namespace: ["small","contact"],
+        namespace: ["small"],
       },
       async leave(data) {
         leaveAnimation();
@@ -151,22 +165,24 @@ barba.init({
         enterAnimation2();
       },
     },
+    {
+      preventRunning: true,
+      name: "Animationsmall",
+      to: {
+        namespace: ["contact"],
+      },
+      async leave(data) {
+        leaveAnimation();
+        await delay(1000);
+      },
+      async after(data) {
+        enterAnimation2();
+        renderReCaptcha(); // Render reCAPTCHA after entering the page
+      },
+      async once(data) {
+        await delay(200);
+        enterAnimation2();
+      },
+    },
   ],
-  views: [{
-    namespace: 'contact', // Adjust the namespace according to where you need reCAPTCHA
-    beforeEnter(data) {
-      // Your existing beforeEnter logic here, if any...
-      
-      // reCAPTCHA execution
-      grecaptcha.ready(() => {
-        grecaptcha.execute('6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co', { action: 'homepage' }).then((token) => {
-          // Here you would typically send the token to your backend for verification
-          // For example, using fetch to send a POST request with the token
-          console.log("reCAPTCHA token:", token); // Placeholder action
-          
-          // Proceed with any actions that should occur after successful reCAPTCHA execution
-        });
-      });
-    }
-  }],
 });
