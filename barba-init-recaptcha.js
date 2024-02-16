@@ -99,19 +99,6 @@ function enterAnimation2() {
   );
 }
 
-function renderReCaptcha() {
-  // Check if the reCAPTCHA element exists and if grecaptcha is defined
-  if (window.grecaptcha && document.querySelector('.g-recaptcha')) {
-    // If so, render reCAPTCHA
-    grecaptcha.render('g-recaptcha', {
-      'sitekey' : '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'
-    });
-  } else {
-    // If not, you might want to log an error or handle this case appropriately
-    console.log('reCAPTCHA element or grecaptcha not found.');
-  }
-}
-
 barba.use(barbaPrefetch);
 barba.init({
   transitions: [
@@ -167,7 +154,7 @@ barba.init({
     },
     {
       preventRunning: true,
-      name: "Animationsmall",
+      name: "Animationcon",
       to: {
         namespace: ["contact"],
       },
@@ -186,3 +173,16 @@ barba.init({
     },
   ],
 });
+
+function renderReCaptcha() {
+  // Check if the reCAPTCHA element exists and if grecaptcha is defined
+  if (window.grecaptcha && document.querySelector('.g-recaptcha')) {
+    // If so, render reCAPTCHA
+    grecaptcha.render('g-recaptcha', {
+      'sitekey' : '6Lf2_fknAAAAAKHiN9BDQzp5RE-6oJzDWtKbu3co'
+    });
+  } else {
+    // If not, you might want to log an error or handle this case appropriately
+    console.log('reCAPTCHA element or grecaptcha not found.');
+  }
+}
