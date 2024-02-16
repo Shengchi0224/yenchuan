@@ -134,7 +134,7 @@ barba.init({
     },
   ],
   views: [{
-    namespace: 'contact',
+    namespace: 'index',
     beforeEnter() {
       grecaptcha.ready(() => {
         grecaptcha.execute(key, {
